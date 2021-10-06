@@ -3,6 +3,8 @@ import inspect
 import requests
 import json
 
+from .tests import *
+
 
 class Testbench:
 
@@ -50,14 +52,13 @@ class Testbench:
     def __publish_score(self):
         data: dict = {
             'author': self.author_name,
-            'test': self.function.__name__,
             'score': self.score,
             'code': inspect.getsource(self.function)
         }
 
         try:
-            requests.post('http://localhost:1337',
-                          data=json.dumps(data))
+            requests.post('http://localhost:1337/tests/%s' %
+                          self.function.__name__, data=json.dumps(data))
         except requests.exceptions.RequestException:
             print('⚠️ Greška pri kontaktiranju servera.')
 
@@ -70,13 +71,3 @@ class Testbench:
     @staticmethod
     def author(name: str):
         Testbench.author_name = name
-
-
-def test_fibonacci(bench: Testbench):
-
-    bench.assert_eq(bench.function(0), 0)
-    bench.assert_eq(bench.function(1), 1)
-    bench.assert_eq(bench.function(2), 1)
-    bench.assert_eq(bench.function(3), 2)
-    bench.assert_eq(bench.function(5), 5)
-    bench.assert_eq(bench.function(20), 6765)
