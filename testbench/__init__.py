@@ -2,7 +2,7 @@ import typing
 import inspect
 import requests
 import json
-import os.path
+import os
 
 from .tests import *
 
@@ -89,3 +89,6 @@ class Testbench:
                     'server': 'http://127.0.0.1:8089',
                     'offline': False
                 }
+
+        if Testbench.author_name is None and os.getenv('JUPYTERHUB_USER') is not None:
+            Testbench.author_name = os.getenv('JUPYTERHUB_USER')

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 import json
 import typing
 from dataclasses import dataclass
@@ -70,6 +70,17 @@ class Scoreboard:
 
         return False
 
+    def reset_test(self, test: str):
+
+        if test in self.__get_test_names():
+            self.board[test] = {}
+        else:
+            self.board.pop(test)
+
+    def reset_all_tests(self):
+
+        self.__init__()
+
 
 app = Flask(__name__)
 board = Scoreboard()
@@ -95,6 +106,20 @@ def tests_specified(test):
             return 'Ok'
         else:
             return 'Err'
+
+
+@ app.route("/reset/tests", methods=['POST'])
+def reset_tests_all():
+    if request.method == 'POST':
+        board.reset_all_tests()
+        return redirect('/tests', 302)
+
+
+@ app.route("/reset/tests/<string:test>", methods=['POST'])
+def reset_tests_specified(test):
+    if request.method == 'POST':
+        board.reset_test(test)
+        return redirect('/tests/{}'.format(test), 302)
 
 
 if __name__ == '__main__':

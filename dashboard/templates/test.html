@@ -29,6 +29,27 @@
         </tr>
         {% endfor %}
     </table>
+    <hr>
+    <table>
+        <tr>
+            <td>
+                <form action="/tests" method="get">
+                    <button name="reset">⬅️ Back</button>
+                </form>
+            </td>
+            <td>
+                <form action="/tests/{{test}}" method="get">
+                    <button name="reset">♻️ Refresh</button>
+                </form>
+            </td>
+            <td>
+                <form action="/reset/tests/{{test}}" method="post">
+                    <button name="reset">🛑 Reset test scoreboard</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
 </body>
 
 </html>

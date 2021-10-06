@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 from testbench import Testbench
 
 Testbench.author('Petar Petrović')
