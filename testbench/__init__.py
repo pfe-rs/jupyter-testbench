@@ -19,6 +19,7 @@ class Testbench:
 
         if self.__run_test():
             self.__show_score()
+            self.__publish_score()
         else:
             print('⛔ Funkcija \'%s\' ne može da se testira! Proverite da li se dobro zove.' %
                   self.function.__name__)
@@ -45,6 +46,20 @@ class Testbench:
             else:
                 print('⚠️ Funkcija \'%s\' uspešno prolazi %i%% testova.' %
                       (self.function.__name__, self.score))
+
+    def __publish_score(self):
+        data: dict = {
+            'author': self.author_name,
+            'test': self.function.__name__,
+            'score': self.score,
+            'code': inspect.getsource(self.function)
+        }
+
+        try:
+            requests.post('http://localhost:1337',
+                          data=json.dumps(data))
+        except requests.exceptions.RequestException:
+            print('⚠️ Greška pri kontaktiranju servera.')
 
     def assert_eq(self, value, truth):
         if value == truth:
