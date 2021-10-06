@@ -11,6 +11,23 @@ sys.path.append(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
 
+config: dict = None
+
+
+def load_config():
+    global config
+    if os.path.isfile('/etc/dashboard.json'):
+        with open('/etc/dashboard.json', 'r') as f:
+            config = json.load(f)
+    else:
+        # Default configuration
+        config = {
+            'host': '127.0.0.1',
+            'port': 8089,
+            'debug': True
+        }
+
+
 class Scoreboard:
 
     def __init__(self):
@@ -44,7 +61,8 @@ class Scoreboard:
     def insert_submission(self, test: str, data: dict) -> bool:
 
         if not test in self.board.keys():
-            return False
+            # Add unknown tests
+            self.board[test] = {}
 
         if 'author' in data.keys() and 'score' in data.keys() and 'code' in data.keys():
             self.board[test][data['author']] = (data['score'], data['code'])
@@ -81,4 +99,5 @@ def tests_specified(test):
 
 if __name__ == '__main__':
 
-    app.run(host='127.0.0.1', port=1337)
+    load_config()
+    app.run(host=config['host'], port=config['port'], debug=config['debug'])

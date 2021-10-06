@@ -2,15 +2,19 @@ import typing
 import inspect
 import requests
 import json
+import os.path
 
 from .tests import *
 
 
 class Testbench:
 
+    config: dict = None
     author_name: str = None
 
     def __init__(self, func: typing.Callable):
+
+        Testbench.__load_config()
 
         if Testbench.author_name is None:
             print('⛔ Nije postavljeno ime autora!')
@@ -56,11 +60,12 @@ class Testbench:
             'code': inspect.getsource(self.function)
         }
 
-        try:
-            requests.post('http://localhost:1337/tests/%s' %
-                          self.function.__name__, data=json.dumps(data))
-        except requests.exceptions.RequestException:
-            print('⚠️ Greška pri kontaktiranju servera.')
+        if not Testbench.config['offline']:
+            try:
+                requests.post(
+                    '{}/tests/{}'.format(Testbench.config['server'], self.function.__name__), data=json.dumps(data))
+            except requests.exceptions.RequestException:
+                print('⚠️ Greška pri kontaktiranju servera za praćenje napretka.')
 
     def assert_eq(self, value, truth):
         if value == truth:
@@ -71,3 +76,16 @@ class Testbench:
     @staticmethod
     def author(name: str):
         Testbench.author_name = name
+
+    @staticmethod
+    def __load_config():
+        if Testbench.config is None:
+            if os.path.isfile('/etc/testbench.json'):
+                with open('/etc/testbench.json', 'r') as f:
+                    Testbench.config = json.load(f)
+            else:
+                # Default configuration
+                Testbench.config = {
+                    'server': 'http://127.0.0.1:8089',
+                    'offline': False
+                }
