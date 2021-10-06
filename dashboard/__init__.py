@@ -31,7 +31,7 @@ def load_config():
 class Scoreboard:
 
     def __init__(self):
-        self.board: dict[str, dict[str, (int, str)]] = {}
+        self.board: dict[str, dict[str, (int, str, int)]] = {}
         for t in self.__get_test_names():
             self.board[t] = {}
 
@@ -65,7 +65,12 @@ class Scoreboard:
             self.board[test] = {}
 
         if 'author' in data.keys() and 'score' in data.keys() and 'code' in data.keys():
-            self.board[test][data['author']] = (data['score'], data['code'])
+            attempts: int = 1
+            if data['author'] in self.board[test]:
+                attempts = self.board[test][data['author']][2] + 1
+
+            self.board[test][data['author']] = (
+                data['score'], data['code'], attempts)
             return True
 
         return False
@@ -95,17 +100,27 @@ def root():
 def tests_all():
     if request.method == 'GET':
         return render_template("tests.html", tests=board.list_tests())
+    else:
+        return 'Err'
 
 
-@ app.route("/tests/<string:test>", methods=['GET', 'POST'])
+@ app.route("/tests/<string:test>", methods=['GET'])
 def tests_specified(test):
     if request.method == 'GET':
         return render_template("test.html", test=test, submissions=board.list_submissions(test))
-    elif request.method == 'POST':
+    else:
+        return 'Err'
+
+
+@ app.route("/submit/tests/<string:test>", methods=['POST'])
+def submit_tests_specified(test):
+    if request.method == 'POST':
         if board.insert_submission(test, json.loads(request.data)):
             return 'Ok'
         else:
             return 'Err'
+    else:
+        return 'Err'
 
 
 @ app.route("/reset/tests", methods=['POST'])

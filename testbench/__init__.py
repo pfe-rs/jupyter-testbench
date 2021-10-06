@@ -63,7 +63,7 @@ class Testbench:
         if not Testbench.config['offline']:
             try:
                 requests.post(
-                    '{}/tests/{}'.format(Testbench.config['server'], self.function.__name__), data=json.dumps(data))
+                    '{}/submit/tests/{}'.format(Testbench.config['server'], self.function.__name__), data=json.dumps(data))
             except requests.exceptions.RequestException:
                 print('⚠️ Greška pri kontaktiranju servera za praćenje napretka.')
 

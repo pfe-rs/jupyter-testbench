@@ -11,6 +11,7 @@
         <tr>
             <th>Score</th>
             <th>Author</th>
+            <th>Attempts</th>
             <th>Solution</th>
         </tr>
         {% for s in submissions %}
@@ -19,10 +20,11 @@
                 {% if s.1 == 100 %}
                 ✅
                 {% else %}
-                {{s.1}}
+                {{s.1}}%
                 {% endif %}
             </td>
             <td>{{s.0}}</td>
+            <td>{{s.3}}</td>
             <td>
                 <textarea readonly>{{s.2}}</textarea>
             </td>

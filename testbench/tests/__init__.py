@@ -1,3 +1,3 @@
-from .fibonacci import *
-from .factorial import *
-from .is_even import *
+from .fibonacci import test_fibonacci
+from .factorial import test_factorial
+from .is_even import test_is_even
