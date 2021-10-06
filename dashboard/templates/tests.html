@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Tests</title>
+</head>
+
+<body>
+    <h1>Tests</h1>
+    <ul>
+        {% for t in tests %}
+        <li>
+            <a href="./tests/{{t}}">{{t}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
