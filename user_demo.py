@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-from library import Testbench
-import typing
+from testbench import Testbench
+
+Testbench.author('Petar Petrović')
 
 
 def fibonacci(n: int) -> int:
