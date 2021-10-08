@@ -77,6 +77,19 @@ class Testbench:
     def author(name: str):
         Testbench.author_name = name
 
+        Testbench.__load_config()
+
+        data: dict = {
+            'author': Testbench.author_name
+        }
+
+        if not Testbench.config['offline']:
+            try:
+                requests.post(
+                    '{}/submit/authors'.format(Testbench.config['server']), data=json.dumps(data))
+            except requests.exceptions.RequestException:
+                print('⚠️ Greška pri kontaktiranju servera za praćenje napretka.')
+
     @staticmethod
     def __load_config():
         if Testbench.config is None:

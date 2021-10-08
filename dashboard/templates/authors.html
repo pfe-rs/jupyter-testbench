@@ -2,15 +2,15 @@
 <html>
 
 <head>
-    <title>Tests</title>
+    <title>Known authors</title>
 </head>
 
 <body>
-    <h1>Tests</h1>
+    <h1>Known authors</h1>
     <ul>
-        {% for t in tests %}
+        {% for a in authors %}
         <li>
-            <a href="/tests/{{t}}">{{t}}</a>
+            {{a}}
         </li>
         {% endfor %}
     </ul>
@@ -23,13 +23,13 @@
                 </form>
             </td>
             <td>
-                <form action="/tests" method="get">
+                <form action="/authors" method="get">
                     <button name="refresh">♻️ Refresh</button>
                 </form>
             </td>
             <td>
-                <form action="/reset/tests" method="post">
-                    <button name="reset">🛑 Reset all scoreboards</button>
+                <form action="/reset/authors" method="post">
+                    <button name="forget">🛑 Forget all authors</button>
                 </form>
             </td>
         </tr>

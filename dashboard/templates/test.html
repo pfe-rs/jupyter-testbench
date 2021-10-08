@@ -19,6 +19,8 @@
             <td>
                 {% if s.1 == 100 %}
                 ✅
+                {% elif s.1 == None %}
+                ❌
                 {% else %}
                 {{s.1}}%
                 {% endif %}
@@ -36,12 +38,12 @@
         <tr>
             <td>
                 <form action="/tests" method="get">
-                    <button name="reset">⬅️ Back</button>
+                    <button name="back">⬅️ Back</button>
                 </form>
             </td>
             <td>
                 <form action="/tests/{{test}}" method="get">
-                    <button name="reset">♻️ Refresh</button>
+                    <button name="refresh">♻️ Refresh</button>
                 </form>
             </td>
             <td>
