@@ -74,14 +74,17 @@ class Scoreboard:
 
         if 'author' in data.keys() and 'score' in data.keys() and 'code' in data.keys():
             attempts: int = 1
+
             if data['author'] in self.board[test]:
                 attempts = self.board[test][data['author']][2] + 1
-            else:
+
+            if data['author'] not in Scoreboard.authors:
                 Scoreboard.authors.append(data['author'])
                 self.add_known_authors([data['author']])
 
             self.board[test][data['author']] = (
                 data['score'], data['code'], attempts)
+
             return True
 
         return False

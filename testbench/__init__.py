@@ -14,7 +14,7 @@ class Testbench:
 
     def __init__(self, func: typing.Callable):
 
-        Testbench.__load_config()
+        Testbench.load_config()
 
         if Testbench.author_name is None:
             print('⛔ Nije postavljeno ime autora!')
@@ -75,9 +75,16 @@ class Testbench:
 
     @staticmethod
     def author(name: str):
-        Testbench.author_name = name
 
-        Testbench.__load_config()
+        if os.getenv('JUPYTERHUB_USER') is not None:
+            print('⚠️ Ime autora nije moguće promeniti!')
+        else:
+            Testbench.author_name = name
+            Testbench.load_config()
+            Testbench.__publish_author()
+
+    @staticmethod
+    def __publish_author():
 
         data: dict = {
             'author': Testbench.author_name
@@ -91,7 +98,7 @@ class Testbench:
                 print('⚠️ Greška pri kontaktiranju servera za praćenje napretka.')
 
     @staticmethod
-    def __load_config():
+    def load_config():
         if Testbench.config is None:
             if os.path.isfile('/etc/testbench.json'):
                 with open('/etc/testbench.json', 'r') as f:
@@ -105,3 +112,7 @@ class Testbench:
 
         if Testbench.author_name is None and os.getenv('JUPYTERHUB_USER') is not None:
             Testbench.author_name = os.getenv('JUPYTERHUB_USER')
+            Testbench.__publish_author()
+
+
+Testbench.load_config()
