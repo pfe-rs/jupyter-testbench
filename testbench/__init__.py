@@ -67,8 +67,22 @@ class Testbench:
             except requests.exceptions.RequestException:
                 print('⚠️ Greška pri kontaktiranju servera za praćenje napretka.')
 
+    def assert_expr(self, expr: bool):
+        if expr:
+            self.passed += 1
+        else:
+            self.failed += 1
+
     def assert_eq(self, value, truth):
         if value == truth:
+            self.passed += 1
+        else:
+            self.failed += 1
+
+    def assert_range(self, value: typing.Union[int, float], 
+                            truth: typing.Union[int, float], 
+                            error: typing.Union[int, float]):
+        if value <= truth + error and value >= truth - error:
             self.passed += 1
         else:
             self.failed += 1
