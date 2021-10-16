@@ -11,11 +11,6 @@ class Testbench:
 
     config: typing.Optional[dict] = None
     author_name: typing.Optional[str] = None
-    function: typing.Optional[typing.Callable] = None
-    scope: typing.Optional[int] = None
-    passed: int
-    failed: int
-    score: typing.Optional[int] = None
 
     def __init__(self, func: typing.Callable):
 
@@ -25,7 +20,10 @@ class Testbench:
             print('⛔ Nije postavljeno ime autora!')
             return
 
-        self.function = func
+        self.function: typing.Optional[typing.Callable] = func
+        self.score: typing.Optional[int] = None
+        self.passed: int
+        self.failed: int
 
         if self.__run_test():
             self.__show_score()
