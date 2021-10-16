@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-import cv2
-import numpy as np
 from testbench import Testbench
 
 Testbench.author('Petar Petrović')
@@ -26,11 +24,19 @@ def factorial(n: int) -> int:
 def is_even(n: int) -> bool:
     return n & 1 == 0
 
-
+import cv2
+import numpy as np
 def binarization(image: np.ndarray) -> np.ndarray:
-    threshold = 128 # 127 for 33% correctness, 129 for 66% correctness
-    image_grayscale: np.ndarray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-    _, image_threshold = cv2.threshold(image_grayscale, threshold, 255, cv2.THRESH_BINARY)
+    # 127 for 33% correctness, 129 for 66% correctness
+    threshold = 128
+    image_grayscale: np.ndarray = cv2.cvtColor(
+        image, cv2.COLOR_RGB2GRAY
+    )
+    _, image_threshold = cv2.threshold(
+        image_grayscale, 
+        threshold, 255, 
+        cv2.THRESH_BINARY
+    )
     return image_threshold
 
 

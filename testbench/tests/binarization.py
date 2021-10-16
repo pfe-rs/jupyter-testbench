@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 def test_binarization(bench: 'Testbench'):
     if bench.function is None:
         return
-    base_data_pkg: str = 'testbench.tests.data.binarization'
+    base_data_pkg: str = 'testbench.tests.datasets.binarization'
     input_data_pkg: str = f'{base_data_pkg}.input'
     output_data_pkg: str = f'{base_data_pkg}.output'
     for resource in contents(input_data_pkg):
