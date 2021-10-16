@@ -9,8 +9,13 @@ from .tests import *
 
 class Testbench:
 
-    config: dict = None
-    author_name: str = None
+    config: typing.Optional[dict] = None
+    author_name: typing.Optional[str] = None
+    function: typing.Optional[typing.Callable] = None
+    scope: typing.Optional[int] = None
+    passed: int
+    failed: int
+    score: typing.Optional[int] = None
 
     def __init__(self, func: typing.Callable):
 
@@ -20,8 +25,7 @@ class Testbench:
             print('⛔ Nije postavljeno ime autora!')
             return
 
-        self.function: str = func
-        self.score: int = None
+        self.function = func
 
         if self.__run_test():
             self.__show_score()
@@ -31,9 +35,11 @@ class Testbench:
                   self.function.__name__)
 
     def __run_test(self) -> bool:
+        if self.function is None:
+            return False
 
-        self.passed: int = 0
-        self.failed: int = 0
+        self.passed = 0
+        self.failed = 0
         test_name: str = 'test_%s' % self.function.__name__
 
         if test_name in globals():
@@ -45,7 +51,7 @@ class Testbench:
             return False
 
     def __show_score(self):
-        if self.score is not None:
+        if self.score is not None and self.function is not None:
             if self.score == 100:
                 print('✅ Funkcija \'%s\' uspešno prolazi sve testove.' %
                       self.function.__name__)
@@ -60,7 +66,7 @@ class Testbench:
             'code': inspect.getsource(self.function)
         }
 
-        if not Testbench.config['offline']:
+        if Testbench.config is not None and self.function is not None and not Testbench.config['offline']:
             try:
                 requests.post(
                     '{}/submit/tests/{}'.format(Testbench.config['server'], self.function.__name__), data=json.dumps(data))
@@ -104,7 +110,7 @@ class Testbench:
             'author': Testbench.author_name
         }
 
-        if not Testbench.config['offline']:
+        if Testbench.config is not None and not Testbench.config['offline']:
             try:
                 requests.post(
                     '{}/submit/authors'.format(Testbench.config['server']), data=json.dumps(data))
