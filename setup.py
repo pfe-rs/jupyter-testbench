@@ -1,12 +1,14 @@
 from distutils.core import setup
+from setuptools import find_packages
 
 setup(
     name='testbench',
     description='Remote code unit testing for Jupyter classrooms',
-    version='0.1.0',
+    version='0.1.1',
     author='PFE Petnica',
     author_email='ele.petnica@gmail.com',
-    packages=['testbench', 'testbench.tests'],
+    packages=find_packages(exclude=['dashboard']),
+    package_data={'': ['*.png']},
     license='LICENSE',
     install_requires=['requests', 'typing'],
 )
