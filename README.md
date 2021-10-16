@@ -20,7 +20,7 @@ Testbench(factorial)
 
 Pokretanjem ovog koda polaznici mogu očekivati 
 ```
-✅ Funkcija 'fac stranetorial' uspešno prolazi sve testove.
+✅ Funkcija 'factorial' uspešno prolazi sve testove.
 ```
 ukoliko njihova implementacija funkcije prolazi sve testove,
 ```
@@ -67,7 +67,7 @@ from .fibonacci import test_fibonacci
 
 ### Poređenje kompleksnijih podataka
 
-Ako funkcija koja se testira radi na podacima poput slika ili matrica brojeva, takvi podaci se mogu čuvati unutar direktorijuma sa imenom funkcije u `testbench/tests/`; u slučaju primera `factorial` to bi bio direktorijum `testbench/tests/factorial/`.
+Ako funkcija koja se testira radi na podacima poput slika ili matrica brojeva, takvi podaci se mogu čuvati unutar direktorijuma sa imenom funkcije u [`testbench/tests/datasets/`](./testbench/tests/datasets/); u slučaju primera `binarization` to bi bio direktorijum `testbench/tests/datasets/binarization/`.
 
 Učitavanje podataka pred poređenje se može vršiti u pomoćnim funkcijama unutar test fajla ili u samoj funkciji za testiranje.
 
@@ -75,7 +75,7 @@ Ukoliko tip podataka zahteva spoljne biblioteke za učitavanje i obradu, one se 
 
 ### Podaci za poređenje pristupni polaznicima
 
-Slično prethodnoj podsekciji, fajlove sa podacima nad kojima polaznici mogu samostalno da pozivaju implementiranu funkciju smestiti u direktorijum [`datasets/`](./datasets/); u slučaju primera to bi bio direktorijum `datasets/factorial/`.
+Slično prethodnoj podsekciji, fajlove sa podacima nad kojima polaznici mogu samostalno da pozivaju implementiranu funkciju smestiti u direktorijum [`datasets/`](./datasets/); u slučaju primera to bi bio direktorijum `datasets/binarization/`.
 
 Podaci treba da budu jasno organizovani i smisleno imenovani da ne zbune polaznike.
 
@@ -87,6 +87,6 @@ U fajlu [`user_demo.py`](./user_demo.py) treba napisati referentnu implementacij
 
 Testovi napisani za svaku radionicu se čuvaju **u zasebnoj git grani** sa imenom oblika `prezime-saradnika_ime-radionice` kako ne bi došlo do konflikata.
 
-Primere `fibonacci`, `factorial` i `is_even` treba obrisati.
+Primere `fibonacci`, `factorial`, `is_even` i `binarization` treba obrisati.
 
 Ako neki saradnik pošalje izmene na `master` granu, one će biti obrisane!
