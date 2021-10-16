@@ -38,7 +38,7 @@ class Scoreboard:
             self.board[t] = {}
 
     def __get_test_names(self) -> list[str]:
-        import testbench
+        import testbench.tests
         return list(map(lambda t: t.removeprefix('test_'), filter(lambda fn: fn.startswith('test_'), dir(testbench))))
 
     def list_tests(self) -> list[str]:
@@ -69,8 +69,9 @@ class Scoreboard:
     def insert_submission(self, test: str, data: dict) -> bool:
 
         if not test in self.board.keys():
-            # Add unknown tests
+            # Add unknown test
             self.board[test] = {}
+            self.add_known_authors(Scoreboard.authors, test=test)
 
         if 'author' in data.keys() and 'score' in data.keys() and 'code' in data.keys():
             attempts: int = 1
