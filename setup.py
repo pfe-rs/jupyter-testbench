@@ -7,7 +7,7 @@ setup(
     version='0.1.1',
     author='PFE Petnica',
     author_email='ele.petnica@gmail.com',
-    packages=['testbench', 'testbench.tests'],
+    packages=['testbench', 'testbench.tests', 'numpy'],
     license='LICENSE',
     install_requires=['requests', 'typing'],
 )
