@@ -154,6 +154,14 @@ class Scoreboard:
 
         Scoreboard.authors = []
 
+    def reset_author(self, author):
+
+        for test in self.board:
+            if author in self.board[test]:
+                self.board[test].pop(author)
+
+        Scoreboard.authors.remove(author)
+
 
 app = Flask(__name__)
 config: typing.Optional[dict] = load_config()
@@ -241,6 +249,15 @@ def reset_authors_all():
         board.reset_all_authors()
         return redirect('/authors', 302)
     return 'Must be POSTed'
+
+
+@ app.route("/reset/authors/<string:author>", methods=['POST'])
+def reset_authors_specified(author):
+    if request.method == 'POST':
+        board.reset_author(author)
+        return redirect('/authors', 302)
+    return 'Must be POSTed'
+
 
 if __name__ == '__main__':
     if config is not None:
