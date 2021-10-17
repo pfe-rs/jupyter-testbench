@@ -50,8 +50,7 @@ def is_prime(n: int) -> bool:
             return False
     return True
 
-def heart_beats(name: str) -> int:
-    data = np.fromfile(name, dtype = int)
+def heart_beats(data: np.array) -> int:
     signal=np.diff(data)
     br = 0
     i = 0
