@@ -6,17 +6,8 @@ from testbench import Testbench
 Testbench.author('Petar Petrović')
 
 
-def is_prime(n: int) -> bool:
-    if n < 2:
-        return False
-    root = int(np.sqrt(n))
-    for i in range(2, root + 1):
-        if n % i == 0:
-            return False
-    return True
-
 def heart_beats(data: np.array) -> int:
-    signal=np.diff(data)
+    signal = np.diff(data)
     br = 0
     i = 0
     while i < np.size(signal)-1:
@@ -29,5 +20,4 @@ def heart_beats(data: np.array) -> int:
 
 
 if __name__ == '__main__':
-    Testbench(is_prime)
     Testbench(heart_beats)
