@@ -1,0 +1,32 @@
+name: Validator
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+jobs:
+  validator:
+    name: Submission validator
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: User demo examples removed
+        run: ./validator.sh 'remove_user_examples'
+      - name: Testbench examples removed
+        run: ./validator.sh 'remove_test_examples'
+      - name: Testbench tests imported
+        run: ./validator.sh 'test_import'
+      - name: Referent implementation
+        run: ./validator.sh 'test_ref_impl'
+      - name: Referent testing
+        run: ./validator.sh 'test_run'
+      - name: Prepare system for execution
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install Testbench module
+        run: pip install .
+      - name: Run user demo
+        run: ./validator.sh 'user_demo'

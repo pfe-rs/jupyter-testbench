@@ -10,7 +10,7 @@
     <ul>
         {% for a in authors %}
         <li>
-            {{a}}
+            <a href="/authors/{{a|urlencode}}">{{a}}</a>
         </li>
         {% endfor %}
     </ul>

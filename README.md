@@ -90,3 +90,12 @@ Testovi napisani za svaku radionicu se čuvaju **u zasebnoj git grani** sa imeno
 Primere `fibonacci`, `factorial`, `is_even` i `binarization` treba obrisati.
 
 Ako neki saradnik pošalje izmene na `master` granu, one će biti obrisane!
+
+### Testiranje valjanosti izmena
+
+Kod se testira pri svakom slanju komitova u repozitorijum.
+Validacija obuhvata sve opisano u ovom uputstvu i služi da uhvati greške na vreme, kako ne bi prošle u produkciju.
+
+Validator se može ručno pokrenuto izvršavanjem skripte [`validator.sh`](./validator.sh).
+
+Ako je povratna vrednost skripte `0`, kod prolazi validaciju i može se poslati na server.
