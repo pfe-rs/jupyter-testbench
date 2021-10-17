@@ -1,11 +1,8 @@
 #!/bin/sh
 
-error_msg=''
-error_subj=''
-
 git_branch() {
     if [ "$(git rev-parse --abbrev-ref HEAD)" = 'master' ]; then
-        printf '\e[1;33mWarning:\e[0m Working on master branch.\n' >&2
+        printf '\e[1;33mWarning:\e[0m Working on master branch!\n' >&2
     fi
 }
 
@@ -93,21 +90,28 @@ user_demo() {
 git_branch
 
 validate() {
+    error_msg=''
+    error_subj=''
     $1
     case $? in
         1) printf '\e[1;31mError:\e[0m %s\e[1m%s\e[0m!\n' "$error_msg" "$error_subj" >&2;
            return 1;;
-        2) printf '\e[1;35mWarning:\e[0m %s\e[1m%s\e[0m!\n' "$error_msg" "$error_subj" >&2;
+        2) printf '\e[1;33mWarning:\e[0m %s\e[1m%s\e[0m!\n' "$error_msg" "$error_subj" >&2;
            return 0;;
     esac
 }
 
 if [ $# = 1 ]; then
-    $1;
+    validate $1;
 else
+    errors=0
     for v in 'remove_user_examples' 'remove_test_examples' 'test_import' 'test_ref_impl' \
              'test_run' 'module_import_user' 'module_import_test' 'user_demo' ; do
-        validate "$v" || exit 1
+        if ! validate "$v"; then
+            errors="$((errors+1))"
+        fi
     done
-    printf '\e[1;32mSuccess:\e[0m Validator found no critical errors!\n' >&2;
+    if [ "$errors" = 0 ]; then
+        printf '\e[1;32mSuccess:\e[0m Validator found no critical errors.\n' >&2;
+    fi
 fi

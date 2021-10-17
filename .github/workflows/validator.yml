@@ -22,6 +22,10 @@ jobs:
         run: ./validator.sh 'test_ref_impl'
       - name: Testbench call for referent implementation
         run: ./validator.sh 'test_run'
+      - name: Dependency check for user imports
+        run: ./validator.sh 'module_import_user'
+      - name: Dependency check for Testbench imports
+        run: ./validator.sh 'module_import_test'
       - name: Prepare system for execution
         uses: actions/setup-python@v2
         with:
