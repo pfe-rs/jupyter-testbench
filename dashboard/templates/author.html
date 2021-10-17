@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Author — {{author}}</title>
+</head>
+
+<body>
+    <h1>Author — {{author}}</h1>
+    <table border="1">
+        <tr>
+            <th>Score</th>
+            <th>Test</th>
+            <th>Attempts</th>
+            <th>Solution</th>
+        </tr>
+        {% for s in submissions %}
+        <tr>
+            <td>
+                {% if s.1 == 100 %}
+                ✅
+                {% elif s.1 == None %}
+                ❌
+                {% else %}
+                {{s.1}}%
+                {% endif %}
+            </td>
+            <td>{{s.0}}</td>
+            <td>{{s.3}}</td>
+            <td>
+                <textarea readonly>{{s.2}}</textarea>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <hr>
+    <table>
+        <tr>
+            <td>
+                <form action="/tests" method="get">
+                    <button name="back">⬅️ Back</button>
+                </form>
+            </td>
+            <td>
+                <form action="/authors/{{author|urlencode}}" method="get">
+                    <button name="refresh">♻️ Refresh</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

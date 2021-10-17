@@ -6,7 +6,7 @@ Na platformi JupyterHub polaznici na početku sveske učitaju `testbench` modul 
 ```py
 from testbench import Testbench
 ```
-Nakon toga pišu kod unutar funkcija **unapred dogovorenih imena i potpisa**, koje testiraju sa `Testbench(ime_funkcije)`. U primeru ispod je napisana i testirana funkcija za računanje faktorijala.
+Nakon toga pišu kôd unutar funkcija **unapred dogovorenih imena i potpisa**, koje testiraju sa `Testbench(ime_funkcije)`. U primeru ispod je napisana i testirana funkcija za računanje faktorijala.
 
 ```py
 def factorial(n: int) -> int:
@@ -18,7 +18,7 @@ def factorial(n: int) -> int:
 Testbench(factorial)
 ```
 
-Pokretanjem ovog koda polaznici mogu očekivati 
+Pokretanjem ovog kôda polaznici mogu očekivati 
 ```
 ✅ Funkcija 'factorial' uspešno prolazi sve testove.
 ```
@@ -32,7 +32,7 @@ ukoliko njihova funkcija prolazi deo test primera, a
 ```
 ako je ime funkcije ili njen potpis pogrešan.
 
-Test primeri koje `Testbench` poziva **nisu** vidljivi polaznicima kako ne bi mogli da kod prilagode da prolazi samo te testove.
+Test primeri koje `Testbench` poziva **nisu** vidljivi polaznicima kako ne bi mogli da kôd prilagode da prolazi samo te testove.
 
 ## Pisasnje testova
 
@@ -90,3 +90,12 @@ Testovi napisani za svaku radionicu se čuvaju **u zasebnoj git grani** sa imeno
 Primere `fibonacci`, `factorial`, `is_even` i `binarization` treba obrisati.
 
 Ako neki saradnik pošalje izmene na `master` granu, one će biti obrisane!
+
+### Testiranje valjanosti izmena
+
+Kôd se testira pri svakom slanju komitova u repozitorijum.
+Validacija obuhvata sve opisano u ovom uputstvu i služi da uhvati greške na vreme, kako ne bi prošle u produkciju.
+
+Validator se može ručno pokrenuti izvršavanjem skripte [`validator.sh`](./validator.sh) i poželjno je **pokrenuti ga pre slanja izmena u repozitorijum**.
+
+Ako je povratna vrednost skripte `0` i nije ispisana greška, kôd prolazi validaciju i može se poslati na server. Bitno je imati na umu da **uspešna validacija ne znači da kôd ima smisla**, nego da zadovoljava uslove za uspešno izvršavanje!
