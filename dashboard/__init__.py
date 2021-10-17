@@ -71,7 +71,7 @@ class Scoreboard:
         return [(test, *self.board[test][author]) for test in sorted(list(self.board.keys()))]
 
     def get_author_name_override(self, author: str) -> str:
-        if config is not None and config['users'] is not None and author in config['users']:
+        if config is not None and 'users' in config and author in config['users']:
             return config['users'][author]
         return author
 
