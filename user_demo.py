@@ -50,8 +50,6 @@ def is_prime(n: int) -> bool:
             return False
     return True
 
-
-import matplotlib.pyplot as plt
 def heart_beats(name: str) -> int:
     data = np.fromfile(name, dtype = int)
     signal=np.diff(data)
