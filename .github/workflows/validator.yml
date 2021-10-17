@@ -18,15 +18,15 @@ jobs:
         run: ./validator.sh 'remove_test_examples'
       - name: Testbench tests imported
         run: ./validator.sh 'test_import'
-      - name: Referent implementation
+      - name: Referent implementation defined
         run: ./validator.sh 'test_ref_impl'
-      - name: Referent testing
+      - name: Testbench call for referent implementation 
         run: ./validator.sh 'test_run'
       - name: Prepare system for execution
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - name: Install Testbench module
+      - name: Install Testbench module to system
         run: pip install .
-      - name: Run user demo
+      - name: Pass tests for referent implementation
         run: ./validator.sh 'user_demo'
