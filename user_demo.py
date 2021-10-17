@@ -39,6 +39,7 @@ def binarization(image: np.ndarray) -> np.ndarray:
         cv2.THRESH_BINARY
     )
     return image_threshold
+    
 
 def is_prime(n: int) -> bool:
     if n < 2:
@@ -50,6 +51,20 @@ def is_prime(n: int) -> bool:
     return True
 
 
+import matplotlib.pyplot as plt
+def heart_beats(name: str) -> int:
+    data = np.fromfile(name, dtype = int)
+    signal=np.diff(data)
+    br = 0
+    i = 0
+    while i<np.size(signal)-1:
+        if signal[i] > 500000:
+            br = br+1
+            i = i + 100
+        else:
+            i = i + 1
+    return br
+
 
 if __name__ == '__main__':
     Testbench(fibonacci)
@@ -57,3 +72,4 @@ if __name__ == '__main__':
     Testbench(is_even)
     Testbench(binarization)
     Testbench(is_prime)
+    Testbench(heart_beats)
