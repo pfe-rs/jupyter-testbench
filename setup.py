@@ -9,5 +9,5 @@ setup(
     author_email='ele.petnica@gmail.com',
     packages=['testbench', 'testbench.tests'],
     license='LICENSE',
-    install_requires=['requests', 'typing'],
+    install_requires=['requests', 'typing', 'scipy', 'numpy', 'matplotlib'],
 )
