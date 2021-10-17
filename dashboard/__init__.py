@@ -106,13 +106,10 @@ class Scoreboard:
         if not 'author' in data.keys():
             return False
 
-        author = data['author']
+        author = self.get_author_name_override(data['author'])
 
         if author in Scoreboard.authors:
             return False
-
-        if config is not None and config['users'] is not None and author in config['users']:
-            author = config['users'][author]
 
         if author not in Scoreboard.authors:
             Scoreboard.authors.append(author)
