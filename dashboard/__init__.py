@@ -106,13 +106,10 @@ class Scoreboard:
         if not 'author' in data.keys():
             return False
 
-        author = data['author']
+        author = self.get_author_name_override(data['author'])
 
         if author in Scoreboard.authors:
             return False
-
-        if config is not None and config['users'] is not None and author in config['users']:
-            author = config['users'][author]
 
         if author not in Scoreboard.authors:
             Scoreboard.authors.append(author)
@@ -156,6 +153,14 @@ class Scoreboard:
                         self.board[test].pop(author)
 
         Scoreboard.authors = []
+
+    def reset_author(self, author):
+
+        for test in self.board:
+            if author in self.board[test]:
+                self.board[test].pop(author)
+
+        Scoreboard.authors.remove(author)
 
 
 app = Flask(__name__)
@@ -244,6 +249,15 @@ def reset_authors_all():
         board.reset_all_authors()
         return redirect('/authors', 302)
     return 'Must be POSTed'
+
+
+@ app.route("/reset/authors/<string:author>", methods=['POST'])
+def reset_authors_specified(author):
+    if request.method == 'POST':
+        board.reset_author(author)
+        return redirect('/authors', 302)
+    return 'Must be POSTed'
+
 
 if __name__ == '__main__':
     if config is not None:

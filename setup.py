@@ -4,7 +4,7 @@ from setuptools import find_packages
 setup(
     name='testbench',
     description='Remote code unit testing for Jupyter classrooms',
-    version='0.1.1',
+    version='0.1.2',
     author='PFE Petnica',
     author_email='ele.petnica@gmail.com',
     packages=['testbench', 'testbench.tests'],
