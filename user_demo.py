@@ -24,6 +24,7 @@ def factorial(n: int) -> int:
 def is_even(n: int) -> bool:
     return n & 1 == 0
 
+
 import cv2
 import numpy as np
 def binarization(image: np.ndarray) -> np.ndarray:
@@ -39,9 +40,20 @@ def binarization(image: np.ndarray) -> np.ndarray:
     )
     return image_threshold
 
+def is_prime(n: int) -> bool:
+    if n < 2:
+        return False
+    root = int(np.sqrt(n))
+    for i in range(2, root + 1):
+        if n % i == 0:
+            return False
+    return True
+
+
 
 if __name__ == '__main__':
     Testbench(fibonacci)
     Testbench(factorial)
     Testbench(is_even)
     Testbench(binarization)
+    Testbench(is_prime)
