@@ -4,6 +4,7 @@ from flask import Flask, request, render_template, redirect
 import json
 import typing
 import os
+import pkgutil
 import sys
 sys.path.append(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
@@ -37,8 +38,9 @@ class Scoreboard:
             Scoreboard.authors = user_list
 
     def __get_test_names(self) -> list[str]:
-        import testbench.tests
-        return list(map(lambda t: t.removeprefix('test_'), filter(lambda fn: fn.startswith('test_'), dir(testbench))))
+        module_path: str = os.path.dirname(pkgutil.get_loader('testbench').get_filename())
+        tests_path = os.path.join(module_path, 'tests')
+        return sorted([test[:-3] for test in os.listdir(tests_path) if test.endswith('.py') and test != '__init__.py'])
 
     def list_tests(self) -> list[str]:
 
