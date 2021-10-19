@@ -29,27 +29,27 @@
             <table>
                 <tr>
                     <td>
-                        <form action="/" method="get">
+                        <form action="{{url_for('root')}}" method="get">
                             <button class="btn btn-secondary" name="back">Dashboard</button>
                         </form>
                     </td>
                     <td>
-                        <form action="/tests" method="get">
+                        <form action="{{url_for('tests_all')}}" method="get">
                             <button class="btn btn-secondary" name="back">Tests</button>
                         </form>
                     </td>
                     <td>
-                        <form action="/authors" method="get">
+                        <form action="{{url_for('authors_all')}}" method="get">
                             <button class="btn btn-secondary" name="back">Authors</button>
                         </form>
                     </td>
                     <td>
-                        <form action="/authors/{{author|urlencode}}" method="get">
+                        <form action="{{url_for('author_specified', author=author)}}" method="get">
                             <button class="btn btn-primary" name="refresh">Refresh</button>
                         </form>
                     </td>
                     <td>
-                        <form action="/reset/authors/{{author|urlencode}}" method="post">
+                        <form action="{{url_for('reset_authors_specified', author=author)}}" method="post">
                             <button class="btn btn-danger" name="forget">Remove author</button>
                         </form>
                     </td>
@@ -78,7 +78,7 @@
                     {{s.1}}%
                     {% endif %}
                 </td>
-                <td><a href="/tests/{{s.0}}">{{s.0}}</a></td>
+                <td><a href="{{url_for('tests_specified', test=s.0)}}">{{s.0}}</a></td>
                 <td>{{s.3}}</td>
                 <td>
                     <pre class="prettyprint"><code>{{s.2}}</code></pre>
