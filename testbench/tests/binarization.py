@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from importlib.resources import contents, path
+from importlib.resources import contents, path, is_resource
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .. import Testbench
