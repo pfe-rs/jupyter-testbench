@@ -9,43 +9,46 @@ from scipy import signal
 
 # Formirati funkciju koja predstavlja signal kao zbir tri 
 # sinusoide frekvencija frekv1, frekv2 i frekv3 redom; i amplituda
-# a1, a2 i a3 istim redosledom. Svaki signal traje sec sekundi i 
-# frekvencije odabiranja su fs Hz.
+# a1, a2 i a3 istim redosledom. Svaki signal traje 3 sekunde i 
+# frekvencije odabiranja su 50 Hz.
 
 # Primer nekih konkretnih vrednosti je:
 # frekv1 = 2, frekv2 = 500 i frekv3 = 7000 Hz
 # a1 =  10, a2 = 5 i a3 = 3
-# sec = 3s i fs = 50 Hz
 
-def formiranje_signala(int: frekv1, int: frekv2, int: frekv3, int: a1, int: a2, int: a3, int: sec, int: fs) -> np.array:
-
-    t = np.linspace(0, sec, fs * sec)
+def formiranje_signala(int: frekv1, int: frekv2, int: frekv3, int: a1, int: a2, int: a3, np.array: t) -> np.array:
     y1 = a1 * np.sin(2 * np.pi * frekv1 * t)
     y2 = a2 * np.sin(2 * np.pi * frekv2 * t)
     y3 = a3 * np.sin(2 * np.pi * frekv3 * t) 
     y = y1 + y2 + y3
-
     return y
 
-
-
-
-plt.plot(t,y)
+# pozivanje funkcije
+fs = 50
+sec = 3
+t = np.linspace(0, sec, fs * sec)
+signal = formiranje_signala(2, 500, 7000, 10, 5, 3, t)
+plt.plot(t, signal)
 plt.show()
 
 
+#Skalirati oformljeni signal sa koeficijentom koef
 
-#skaliranje datog signala za koeficijent 0.3
-a = 0.3
-y_skalirano = a*y
-plt.plot(t,y)
-plt.plot(t,y_skalirano)
+def skaliranje_signala(np.array: signal, float: koef) -> np.array:
+    y_skalirano = koef*signal
+
+    return y_skalirano
+
+# pozivanje funkcije
+koef = 0.3
+skalirani_signal = skaliranje_signala(signal, koef)
+plt.plot(t,signal)
+plt.plot(t,skalirani_signal)
 plt.show()
 
 
+#Implementirati kasnjenje oformljenog signala za kas
 
-
-#kasnjenje signala za 5
 def shiftSignal(x, n0):
     N = len(x)
     y = np.zeros(N)
@@ -55,7 +58,12 @@ def shiftSignal(x, n0):
         y[n0:N] = x[:N-n0]
     return y
 
-y_pomereno = shiftSignal(y, 5)
+def kasnjenje_signala(np.array: signal, float: kas) -> np.array:
+    kasniji_signal = shiftSignal(signal, kas)
+
+    return kasniji_signal
+
+kasniji_signal = kasnjenje_signala(signal, 5)
 plt.plot(t,y)
 plt.plot(t[5:],y_pomereno[5:])
 plt.show()
