@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, url_for
 import json
 import typing
 import os
@@ -8,6 +8,7 @@ import pkgutil
 import sys
 sys.path.append(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
+
 
 def load_config() -> typing.Optional[dict]:
     if os.path.isfile('/etc/dashboard.json'):
@@ -28,7 +29,8 @@ class Scoreboard:
 
     def __init__(self):
         # test -> author -> (score, code, attempts)
-        self.board: dict[str, dict[str, typing.Tuple[typing.Optional[int], str, int]]] = {}
+        self.board: dict[str, dict[str,
+                                   typing.Tuple[typing.Optional[int], str, int]]] = {}
         for t in self.__get_test_names():
             self.board[t] = {}
         if config is not None and 'users' in config:
@@ -38,7 +40,8 @@ class Scoreboard:
             Scoreboard.authors = user_list
 
     def __get_test_names(self) -> list[str]:
-        module_path: str = os.path.dirname(pkgutil.get_loader('testbench').get_filename())
+        module_path: str = os.path.dirname(
+            pkgutil.get_loader('testbench').get_filename())
         tests_path = os.path.join(module_path, 'tests')
         return sorted([test[:-3] for test in os.listdir(tests_path) if test.endswith('.py') and test != '__init__.py'])
 
@@ -190,7 +193,7 @@ def authors_all():
 
 
 @ app.route("/authors/<string:author>", methods=['GET'])
-def author(author):
+def author_specified(author):
     if request.method == 'GET':
         return render_template("author.html", author=author, submissions=board.list_author_submissions(author))
     else:
@@ -231,7 +234,7 @@ def submit_authors():
 def reset_tests_all():
     if request.method == 'POST':
         board.reset_all_tests()
-        return redirect('/tests', 302)
+        return redirect(url_for('tests_all'), 302)
     return 'Must be POSTed'
 
 
@@ -239,7 +242,7 @@ def reset_tests_all():
 def reset_tests_specified(test):
     if request.method == 'POST':
         board.reset_test(test)
-        return redirect('/tests/{}'.format(test), 302)
+        return redirect(url_for('tests_specified', test=test), 302)
     return 'Must be POSTed'
 
 
@@ -247,7 +250,7 @@ def reset_tests_specified(test):
 def reset_authors_all():
     if request.method == 'POST':
         board.reset_all_authors()
-        return redirect('/authors', 302)
+        return redirect(url_for('authors_all'), 302)
     return 'Must be POSTed'
 
 
@@ -255,10 +258,11 @@ def reset_authors_all():
 def reset_authors_specified(author):
     if request.method == 'POST':
         board.reset_author(author)
-        return redirect('/authors', 302)
+        return redirect(url_for('authors_all'), 302)
     return 'Must be POSTed'
 
 
 if __name__ == '__main__':
     if config is not None:
-        app.run(host=config['host'], port=config['port'], debug=config['debug'])
+        app.run(host=config['host'], port=config['port'],
+                debug=config['debug'])
