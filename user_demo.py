@@ -14,19 +14,22 @@ def image_loader(path: str) -> torch.Tensor:
 
 class RandomGamma():
     def __init__(self, random_gamma_delta):
-        np.random.seed(0)
         self.gamma_range = 1.0 - random_gamma_delta, 1.0 + random_gamma_delta
 
     def __call__(self, image):
         return np.power(image, np.random.uniform(*self.gamma_range))
 
 class ClipImage():
-
     def __call__(self, image):
         return np.clip(image, 0.0, 1.0)
         
+def getRandomGamma(randaom_gamma_delta):
+    return RandomGamma(randaom_gamma_delta)
+
+def getClipImage():
+    return ClipImage()
 
 if __name__ == '__main__':
     Testbench(image_loader)
-    Testbench(RandomGamma(0.3).__call__)
-    Testbench(ClipImage().__call__)
+    Testbench(getRandomGamma)
+    Testbench(getClipImage)
