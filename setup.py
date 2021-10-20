@@ -7,7 +7,8 @@ setup(
     version='0.1.2',
     author='PFE Petnica',
     author_email='ele.petnica@gmail.com',
-    packages=['testbench', 'testbench.tests'],
+    packages=find_packages(exclude=['dashboard']),
+    package_data={'': ['*.*']},
     license='LICENSE',
     install_requires=['requests', 'typing'],
 )
