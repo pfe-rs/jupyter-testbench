@@ -1,3 +1,4 @@
+from torch.functional import Tensor
 from testbench import Testbench
 
 import torch
@@ -23,11 +24,15 @@ class ClipImage():
     def __call__(self, image):
         return np.clip(image, 0.0, 1.0)
         
-def getRandomGamma(randaom_gamma_delta):
+def getRandomGamma(randaom_gamma_delta : float) -> torch.Tensor:
     return RandomGamma(randaom_gamma_delta)
 
-def getClipImage():
+def getClipImage() -> torch.Tensor:
     return ClipImage()
+
+#dummy
+def return_model1() -> torch.nn :
+    return 0
 
 if __name__ == '__main__':
     Testbench(image_loader)
