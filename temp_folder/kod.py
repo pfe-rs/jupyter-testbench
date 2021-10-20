@@ -16,7 +16,7 @@ from scipy import signal
 # frekv1 = 2, frekv2 = 500 i frekv3 = 7000 Hz
 # a1 =  10, a2 = 5 i a3 = 3
 
-def formiranje_signala(int: frekv1, int: frekv2, int: frekv3, int: a1, int: a2, int: a3, np.array: t) -> np.array:
+def formiranje_signala(frekv1: int , frekv2: int, frekv3: int, a1: int, a2: int, a3: int, t: np.array) -> np.array:
     y1 = a1 * np.sin(2 * np.pi * frekv1 * t)
     y2 = a2 * np.sin(2 * np.pi * frekv2 * t)
     y3 = a3 * np.sin(2 * np.pi * frekv3 * t) 
@@ -34,7 +34,7 @@ plt.show()
 
 #Skalirati oformljeni signal sa koeficijentom koef
 
-def skaliranje_signala(np.array: signal, float: koef) -> np.array:
+def skaliranje_signala(signal: np.array, koef: float) -> np.array:
     y_skalirano = koef*signal
 
     return y_skalirano
@@ -58,7 +58,7 @@ def shiftSignal(x, n0):
         y[n0:N] = x[:N-n0]
     return y
 
-def kasnjenje_signala(np.array: signal, float: kas) -> np.array:
+def kasnjenje_signala(signal: np.array, kas: float) -> np.array:
     kasniji_signal = shiftSignal(signal, kas)
 
     return kasniji_signal
@@ -68,9 +68,13 @@ plt.plot(t,y)
 plt.plot(t[5:],y_pomereno[5:])
 plt.show()
 
+#Plotovati snagu x**2 prvobitnog signala
 
+signal_1 = signal**2
+plt.plot(t,signal_1)
+plt.show()
 
-
+'''
 #threshold
 koeficijenti = signal.butter(10, 3, 'hp', fs=fs, output='sos')
 filtrirani_signal = signal.sosfilt(koeficijenti, y)
@@ -103,3 +107,4 @@ idx1 = np.argsort(freqs1)
 plt.plot(freqs[idx], ps[idx])
 plt.plot(freqs1[idx1], ps1[idx1])
 plt.show()
+'''
