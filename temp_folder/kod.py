@@ -48,7 +48,7 @@ plt.show()
 
 
 
-#thrashold
+#threshold
 koeficijenti = signal.butter(10, 3, 'hp', fs=fs, output='sos')
 filtrirani_signal = signal.sosfilt(koeficijenti, y)
 spektar1 = np.abs(fft(y))
