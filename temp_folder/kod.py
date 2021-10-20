@@ -21,7 +21,6 @@ def formiranje_signala(int: frekv1, int: frekv2, int: frekv3, int: a1, int: a2, 
     y2 = a2 * np.sin(2 * np.pi * frekv2 * t)
     y3 = a3 * np.sin(2 * np.pi * frekv3 * t) 
     y = y1 + y2 + y3
-
     return y
 
 # pozivanje funkcije
@@ -31,7 +30,6 @@ t = np.linspace(0, sec, fs * sec)
 signal = formiranje_signala(2, 500, 7000, 10, 5, 3, t)
 plt.plot(t, signal)
 plt.show()
-
 
 
 #Skalirati oformljeni signal sa koeficijentom koef
