@@ -1,1 +1,3 @@
 from .heart_beats import test_heart_beats
+from .zbirTriSinusoide import test_zbirTriSinusoide
+from .skaliranje_signala import test_skaliranje_signala

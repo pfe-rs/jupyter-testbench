@@ -1,4 +1,5 @@
 import numpy as np
+import testbench
 
 def zbirTriSinusoide(f1: float, f2: float, f3: float, A1: float, A2: float, A3: float) -> np.array:
     t = np.linspace(0, 3, 3 * 10000)
@@ -15,6 +16,5 @@ def test_zbirTriSinusoide(bench: 'Testbench'):
     A1_vals = [3, 2, 0.7]
     A2_vals = [1, 2, 4]
     A3_vals = [1, 5, 10]
-
-    for f1, f2, f3, A1, A2, A3 in zip(f1_vals, f2_vals, f3_vals, A1_vals, A2_vals, A3_vals):
-        bench.assert_eq(*(f1, f2, f3, A1, A2, A3), test_zbirTriSinusoide(f1, f2, f3, A1, A2, A3))
+    bench.assert_expr(np.array_equal(bench.function(1,1,1,1,1,1), zbirTriSinusoide(1,1,1,1,1,1)))
+    

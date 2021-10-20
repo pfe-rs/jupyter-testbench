@@ -26,6 +26,10 @@ def zbirTriSinusoide(f1: float, f2: float, f3: float, A1: float, A2: float, A3: 
     x3 = A3 * np.sin(f3 * 2 * np.pi * t)
     return x1 + x2 + x3
 
+def skaliranje_signala(signal: np.array, koef: float) -> np.array:
+    return koef * signal
+
 if __name__ == '__main__':
     Testbench(heart_beats)
     Testbench(zbirTriSinusoide)
+    Testbench(skaliranje_signala)
