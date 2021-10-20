@@ -3,37 +3,50 @@
 
 <head>
     <title>Tests</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <h1>Tests</h1>
-    <ul>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <h1>Tests</h1>
+            <table>
+                <tr>
+                    <td>
+                        <form action="{{url_for('root')}}" method="get">
+                            <button class="btn btn-secondary" name="back">Dashboard</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{url_for('authors_all')}}" method="get">
+                            <button class="btn btn-secondary" name="back">Authors</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{url_for('tests_all')}}" method="get">
+                            <button class="btn btn-primary" name="refresh">Refresh</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{url_for('reset_tests_all')}}" method="post">
+                            <button class="btn btn-danger" name="reset">Reset all scoreboards</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </nav>
+    <ul class="list-group">
         {% for t in tests %}
-        <li>
-            <a href="/tests/{{t}}">{{t}}</a>
+        <li class="list-group-item">
+            <a href="{{url_for('tests_specified', test=t)}}">{{t}}</a>
         </li>
         {% endfor %}
     </ul>
-    <hr>
-    <table>
-        <tr>
-            <td>
-                <form action="/" method="get">
-                    <button name="back">⬅️ Back</button>
-                </form>
-            </td>
-            <td>
-                <form action="/tests" method="get">
-                    <button name="refresh">♻️ Refresh</button>
-                </form>
-            </td>
-            <td>
-                <form action="/reset/tests" method="post">
-                    <button name="reset">🛑 Reset all scoreboards</button>
-                </form>
-            </td>
-        </tr>
-    </table>
 </body>
 
 </html>
