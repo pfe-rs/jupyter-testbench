@@ -38,3 +38,5 @@ if __name__ == '__main__':
     Testbench(image_loader)
     Testbench(getRandomGamma)
     Testbench(getClipImage)
+    #dummy
+    Testbench(return_model1)
