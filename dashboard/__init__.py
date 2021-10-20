@@ -22,6 +22,16 @@ def load_config() -> typing.Optional[dict]:
             'debug': True
         }
 
+def load_users() -> dict[str, str]:
+    users: list[dict[str, str]] = []
+    if os.path.isfile('/etc/users.json'):
+        with open('/etc/users.json', 'r') as f:
+            users = json.load(f)
+    ret: dict[str, str] = {}
+    for user in users:
+        ret[user['username']] = user['name']
+    return ret
+
 
 class Scoreboard:
 
@@ -33,11 +43,9 @@ class Scoreboard:
                                    typing.Tuple[typing.Optional[int], str, int]]] = {}
         for t in self.__get_test_names():
             self.board[t] = {}
-        if config is not None and 'users' in config:
-            users: dict[str, str] = config['users']
-            user_list: list[str] = list(users.values())
-            self.add_known_authors(user_list)
-            Scoreboard.authors = user_list
+        user_list: list[str] = list(users.values())
+        self.add_known_authors(user_list)
+        Scoreboard.authors = user_list
 
     def __get_test_names(self) -> list[str]:
         module_path: str = os.path.dirname(
@@ -74,8 +82,8 @@ class Scoreboard:
         return [(test, *self.board[test][author]) for test in sorted(list(self.board.keys()))]
 
     def get_author_name_override(self, author: str) -> str:
-        if config is not None and 'users' in config and author in config['users']:
-            return config['users'][author]
+        if author in users:
+            return users[author]
         return author
 
     def insert_submission(self, test: str, data: dict) -> bool:
@@ -167,7 +175,7 @@ class Scoreboard:
 
 
 app = Flask(__name__)
-config: typing.Optional[dict] = load_config()
+users: dict[str, str] = load_users()
 board = Scoreboard()
 
 
@@ -263,6 +271,7 @@ def reset_authors_specified(author):
 
 
 if __name__ == '__main__':
+    config: typing.Optional[dict] = load_config()
     if config is not None:
         app.run(host=config['host'], port=config['port'],
                 debug=config['debug'])
