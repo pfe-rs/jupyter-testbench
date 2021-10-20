@@ -7,14 +7,29 @@ from scipy import signal
 
 
 
-#formiranje signala kao zbir 3 sinusoide
-fs = 50 # frekvencija odabiranja
-sec = 3 # duzina u sekundama
-t = np.linspace(0, sec, fs * sec)
-y1 = 10 * np.sin(2 * np.pi * 2 * t)
-y2 = 5 * np.sin(2 * np.pi * 500 * t)
-y3 = 3 * np.sin(2 * np.pi * 7000 * t) 
-y = y1 + y2 + y3
+# Formirati funkciju koja predstavlja signal kao zbir tri 
+# sinusoide frekvencija frekv1, frekv2 i frekv3 redom; i amplituda
+# a1, a2 i a3 istim redosledom. Svaki signal traje sec sekundi i 
+# frekvencije odabiranja su fs Hz.
+
+# Primer nekih konkretnih vrednosti je:
+# frekv1 = 2, frekv2 = 500 i frekv3 = 7000 Hz
+# a1 =  10, a2 = 5 i a3 = 3
+# sec = 3s i fs = 50 Hz
+
+def formiranje_signala(int: frekv1, int: frekv2, int: frekv3, int: a1, int: a2, int: a3, int: sec, int: fs) -> np.array:
+
+    t = np.linspace(0, sec, fs * sec)
+    y1 = a1 * np.sin(2 * np.pi * frekv1 * t)
+    y2 = a2 * np.sin(2 * np.pi * frekv2 * t)
+    y3 = a3 * np.sin(2 * np.pi * frekv3 * t) 
+    y = y1 + y2 + y3
+
+    return y
+
+
+
+
 plt.plot(t,y)
 plt.show()
 
