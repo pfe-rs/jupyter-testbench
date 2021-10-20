@@ -8,25 +8,31 @@ git_branch() {
 
 remove_user_examples() {
     error_msg='User demo examples are not removed'
-    ! grep -qF 'def fibonacci(n: int) -> int:' ./user_demo.py && \
-    ! grep -qF 'def factorial(n: int) -> int:' ./user_demo.py && \
-    ! grep -qF 'def is_even(n: int) -> bool:' ./user_demo.py && \
-    ! grep -qF 'def binarization(image: np.ndarray) -> np.ndarray:' ./user_demo.py
+    ! grep -qF 'def fibonacci(n: int) -> int:' ./user_demo.py &&
+        ! grep -qF 'def factorial(n: int) -> int:' ./user_demo.py &&
+        ! grep -qF 'def is_even(n: int) -> bool:' ./user_demo.py &&
+        ! grep -qF 'def binarization(image: np.ndarray) -> np.ndarray:' ./user_demo.py
 }
 
 remove_test_examples() {
     error_msg='Testbench examples are not removed'
-    ! test -f ./testbench/tests/fibonacci.py && \
-    ! test -f ./testbench/tests/factorial.py && \
-    ! test -f ./testbench/tests/is_even.py && \
-    ! test -f ./testbench/tests/binarization.py && \
-    ! test -d ./testbench/tests/datasets/binarization
+    ! test -f ./testbench/tests/fibonacci.py &&
+        ! test -f ./testbench/tests/factorial.py &&
+        ! test -f ./testbench/tests/is_even.py &&
+        ! test -f ./testbench/tests/binarization.py &&
+        ! test -d ./testbench/tests/datasets/binarization
+}
+
+remove_notebook_example() {
+    error_msg='User demo notebook is not removed'
+    error_subj=''
+    ! test -f './notebooks/User demo.ipynb'
 }
 
 tests="$(
     find ./testbench/tests -maxdepth 1 -type f \
-        -name '*.py' -not -name '__init__.py' -printf '%P\n' |\
-    sed 's/\.py$//'
+        -name '*.py' -not -name '__init__.py' -printf '%P\n' |
+        sed 's/\.py$//'
 )"
 
 test_import() {
@@ -94,24 +100,29 @@ validate() {
     error_subj=''
     $1
     case $? in
-        1) printf '\e[1;31mError:\e[0m %s\e[1m%s\e[0m!\n' "$error_msg" "$error_subj" >&2;
-           return 1;;
-        2) printf '\e[1;33mWarning:\e[0m %s\e[1m%s\e[0m!\n' "$error_msg" "$error_subj" >&2;
-           return 0;;
+    1)
+        printf '\e[1;31mError:\e[0m %s\e[1m%s\e[0m!\n' "$error_msg" "$error_subj" >&2
+        return 1
+        ;;
+    2)
+        printf '\e[1;33mWarning:\e[0m %s\e[1m%s\e[0m!\n' "$error_msg" "$error_subj" >&2
+        return 0
+        ;;
     esac
 }
 
 if [ $# = 1 ]; then
-    validate $1;
+    validate $1
 else
     errors=0
-    for v in 'remove_user_examples' 'remove_test_examples' 'test_import' 'test_ref_impl' \
-             'test_run' 'module_import_user' 'module_import_test' 'user_demo' ; do
+    for v in 'remove_user_examples' 'remove_test_examples' 'remove_notebook_example' \
+        'test_import' 'test_ref_impl' 'test_run' \
+        'module_import_user' 'module_import_test' 'user_demo'; do
         if ! validate "$v"; then
-            errors="$((errors+1))"
+            errors="$((errors + 1))"
         fi
     done
     if [ "$errors" = 0 ]; then
-        printf '\e[1;32mSuccess:\e[0m Validator found no critical errors.\n' >&2;
+        printf '\e[1;32mSuccess:\e[0m Validator found no critical errors.\n' >&2
     fi
 fi

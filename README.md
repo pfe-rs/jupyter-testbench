@@ -34,6 +34,12 @@ ako je ime funkcije ili njen potpis pogrešan.
 
 Test primeri koje `Testbench` poziva **nisu** vidljivi polaznicima kako ne bi mogli da kôd prilagode da prolazi samo te testove.
 
+## Unapred dodate sveske
+
+Sve Jupyter sveske koje polaznici treba da dobiju pri ulaženju na platformu staviti u [`notebooks/`](./notebooks/) direktorijum, kao što je to urađeno sa primerom [`notebooks/User demo.ipynb`](./notebooks/User%20demo.ipynb). Te sveske mogu biti teorijski uvod, primeri ili postavljeni zadaci koje polaznici treba da dovrše.
+
+Organizacija svesaka u poddirektorijume je dozvoljena.
+
 ## Pisasnje testova
 
 Testovi koje `Testbench` pokreće se nalaze u [`testbench/tests/`](./testbench/tests/) direktorijumu, gde test za svaku funkciju treba da bude u istoimenom Python fajlu. U slučaju `factorial` funkcije, to je [`testbench/tests/factorial.py`](./testbench/tests/factorial.py) koji **mora** da sadrži funkciju potpisa `def test_factorial(bench: 'Testbench')` bez povratne vrednosti. Pomoćne funkcije su dozvoljene.

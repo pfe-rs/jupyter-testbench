@@ -16,6 +16,8 @@ jobs:
         run: ./validator.sh 'remove_user_examples'
       - name: Testbench examples removed
         run: ./validator.sh 'remove_test_examples'
+      - name: Notebook example removed
+        run: ./validator.sh 'remove_notebook_example'
       - name: Testbench tests imported
         run: ./validator.sh 'test_import'
       - name: Referent implementation defined
