@@ -7,4 +7,4 @@ from .cutShiftSignal import test_cutShiftSignal
 from .returnAmpCharacteristic import test_returnAmpCharacteristic
 from .returnPhaseCharacteristic import test_returnPhaseCharacteristic
 from .meanPower import test_meanPower
-
+from .movingAverage import test_movingAverage
