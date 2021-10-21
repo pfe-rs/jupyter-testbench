@@ -52,7 +52,6 @@ if __name__ == '__main__':
     Testbench(cutShiftSignal)
     Testbench(skaliranje_signala)
     Testbench(squarePower)
-    Testbench(shiftSignal)
     Testbench(cutShiftSignal)
     
     
