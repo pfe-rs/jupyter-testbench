@@ -21,4 +21,4 @@ def test_heart_beats(bench: 'Testbench'):
         with path(hearth_beats_path, resource) as data_path:
             file = np.fromfile(data_path, dtype = int)
             bench.assert_eq(bench.function(file), heart_beats(file))
-        
+            
