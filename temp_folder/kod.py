@@ -81,10 +81,21 @@ def shiftSignal(x, n0):
     else:
         y[n0:N] = x[:N-n0]
     return y
+
+
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def obrada(x,s,n):
-    a = shiftSignal(x,n)
-    a1 = a[s:]
-    return a1
+    y = x[S:]
+    y1 = shiftSignal(y, K)
+    return y1
+
+def squarePower(x: np.array) -> np.array:
+    # Implementirati ovaj deo
+    y = x**2
+    return y
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 s = 6
 n = 10
