@@ -2,6 +2,7 @@
 
 import numpy as np
 from testbench import Testbench
+from scipy.fft import fft
 
 Testbench.author('Petar Petrović')
 
@@ -46,6 +47,14 @@ def skaliranje_signala(signal: np.array, koef: float) -> np.array:
 def squarePower(x: np.array) -> np.array:
     return x**2
 
+def returnAmpCharacteristic(x: np.array) -> np.array:
+    amp_spectrum = np.abs(fft(x))
+    return amp_spectrum
+
+def returnPhaseCharacteristic(x: np.array) -> np.array:
+    phase_spectrum = np.angle(fft(x))
+    return phase_spectrum
+
 if __name__ == '__main__':
     Testbench(heart_beats)
     Testbench(signalFormation)
@@ -53,5 +62,5 @@ if __name__ == '__main__':
     Testbench(skaliranje_signala)
     Testbench(squarePower)
     Testbench(cutShiftSignal)
-    
-    
+    Testbench(returnAmpCharacteristic)
+    Testbench(returnPhaseCharacteristic)
