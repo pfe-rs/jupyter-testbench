@@ -68,6 +68,47 @@ plt.plot(t,y)
 plt.plot(t[5:],y_pomereno[5:])
 plt.show()
 
+
+
+
+
+#zadatak 2 obrada signala sa kasnjenjem i odsecanjem 
+def shiftSignal(x, n0):
+    N = len(x)
+    y = np.zeros(N)
+    if n0 < 0:
+        y[:N + n0] = x[-n0:N]
+    else:
+        y[n0:N] = x[:N-n0]
+    return y
+
+
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+def obrada(x,s,n):
+    y = x[S:]
+    y1 = shiftSignal(y, K)
+    return y1
+
+def squarePower(x: np.array) -> np.array:
+    # Implementirati ovaj deo
+    y = x**2
+    return y
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+s = 6
+n = 10
+plt.plot(t,y)
+a = obrada(y,s,n)
+plt.plot(t[s+n:],a[n:])
+plt.show()
+
+
+
+
+
+
 #Plotovati snagu x**2 prvobitnog signala
 
 signal_1 = signal**2
