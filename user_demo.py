@@ -1,47 +1,52 @@
 #!/usr/bin/env python
 
 from testbench import Testbench
+import random
 
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score, adjusted_rand_score
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 Testbench.author('Petar Petrović')
 
 
-def fibonacci(n: int) -> int:
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    else:
-        return fibonacci(n - 1) + fibonacci(n - 2)
-
-
-def factorial(n: int) -> int:
-    if n <= 1:
-        return 1
-    else:
-        return n * factorial(n - 1)
-
-
-def is_even(n: int) -> bool:
-    return n & 1 == 0
-
-import cv2
-import numpy as np
-def binarization(image: np.ndarray) -> np.ndarray:
-    # 127 for 33% correctness, 129 for 66% correctness
-    threshold = 128
-    image_grayscale: np.ndarray = cv2.cvtColor(
-        image, cv2.COLOR_RGB2GRAY
+def k_means(data: np.ndarray) -> np.ndarray:
+    number_of_clusters = 5
+    preprocessor = Pipeline(
+        [
+            ("scaler", MinMaxScaler()),
+        ]
     )
-    _, image_threshold = cv2.threshold(
-        image_grayscale, 
-        threshold, 255, 
-        cv2.THRESH_BINARY
+    clusterer = Pipeline(
+        [
+            (
+                "kmeans",
+                KMeans(
+                    n_clusters=number_of_clusters,
+                    init="k-means++",
+                    n_init=50,
+                    max_iter=1000,
+                    random_state=42,
+                ),
+            ),
+        ]
     )
-    return image_threshold
+    pipe = Pipeline(
+        [
+            ("preprocessor", preprocessor),
+            ("clusterer", clusterer)
+        ]
+    )
+    pipe.fit(data)
+    predicted_labels = pipe["clusterer"]["kmeans"].labels_
+
+    return predicted_labels
 
 
 if __name__ == '__main__':
-    Testbench(fibonacci)
-    Testbench(factorial)
-    Testbench(is_even)
-    Testbench(binarization)
+    Testbench(k_means)
