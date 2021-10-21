@@ -2,11 +2,8 @@
 
 import numpy as np
 from testbench import Testbench
-<<<<<<< HEAD
 from scipy.fft import fft
-=======
 from testbench.tests.meanPower import meanPower
->>>>>>> 4004304d71cdd1a5ddc70d3e9ab4ca19776973b2
 
 Testbench.author('Petar Petrović')
 
@@ -61,6 +58,13 @@ def returnPhaseCharacteristic(x: np.array) -> np.array:
 def meanPower(x: np.array) -> int:
     return np.mean(x) 
 
+def movingAverage(x: np.array, w: int) -> np.array:
+    smoothed = np.zeros(len(x) - w + 1)
+    # ovde je potrebno implementirati zadatu funkciju
+    for i in range(len(x) - w + 1):
+        smoothed[i] = np.mean(x[i:i+w])
+    return smoothed
+
 if __name__ == '__main__':
     Testbench(heart_beats)
     Testbench(signalFormation)
@@ -71,5 +75,5 @@ if __name__ == '__main__':
     Testbench(returnAmpCharacteristic)
     Testbench(returnPhaseCharacteristic)
     Testbench(meanPower)
-    
+    Testbench(movingAverage)
     
