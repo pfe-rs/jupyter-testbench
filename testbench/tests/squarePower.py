@@ -6,12 +6,9 @@ def squarePower(x: np.array) -> np.array:
 
 
 def test_squarePower(bench: 'Testbench'):
-    #TREBA DA SE IMPLEMENTIRAJU PRAVI PRIMERI
-    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    f1_vals = [0.5, 1, 4]
-    f2_vals = [2, 0.8, 1]
-    f3_vals = [3, 4, 5]
-    A1_vals = [3, 2, 0.7]
-    A2_vals = [1, 2, 4]
-    A3_vals = [1, 5, 10]
-    bench.assert_expr(np.array_equal(bench.function(1,1,1,1,1,1), squarePower(1,1,1,1,1,1)))
+    f1_vals = np.array([1, 2, -3, 4, -5, 6, 7])
+    f2_vals = np.array([4, 6, 2, 8, 9])
+    f3_vals = np.array([0.5, 4, -1.2, 3.0])
+    bench.assert_expr(np.array_equal(bench.function(f1_vals), skaliranje_signala(f1_vals)))
+    bench.assert_expr(np.array_equal(bench.function(f2_vals), skaliranje_signala(f2_vals)))
+    bench.assert_expr(np.array_equal(bench.function(f3_vals), skaliranje_signala(f3_vals)))
