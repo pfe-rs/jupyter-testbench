@@ -2,6 +2,7 @@
 
 import numpy as np
 from testbench import Testbench
+from testbench.tests.meanPower import meanPower
 
 Testbench.author('Petar Petrović')
 
@@ -46,6 +47,9 @@ def skaliranje_signala(signal: np.array, koef: float) -> np.array:
 def squarePower(x: np.array) -> np.array:
     return x**2
 
+def meanPower(x: np.array) -> int:
+    return np.mean(x) 
+
 if __name__ == '__main__':
     Testbench(heart_beats)
     Testbench(signalFormation)
@@ -53,5 +57,6 @@ if __name__ == '__main__':
     Testbench(skaliranje_signala)
     Testbench(squarePower)
     Testbench(cutShiftSignal)
+    Testbench(meanPower)
     
     
