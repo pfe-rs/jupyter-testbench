@@ -17,22 +17,22 @@
             <table>
                 <tr>
                     <td>
-                        <form action="/" method="get">
+                        <form action="{{url_for('root')}}" method="get">
                             <button class="btn btn-secondary" name="back">Dashboard</button>
                         </form>
                     </td>
                     <td>
-                        <form action="/tests" method="get">
+                        <form action="{{url_for('tests_all')}}" method="get">
                             <button class="btn btn-secondary" name="back">Tests</button>
                         </form>
                     </td>
                     <td>
-                        <form action="/authors" method="get">
+                        <form action="{{url_for('authors_all')}}" method="get">
                             <button class="btn btn-primary" name="refresh">Refresh</button>
                         </form>
                     </td>
                     <td>
-                        <form action="/reset/authors" method="post">
+                        <form action="{{url_for('reset_authors_all')}}" method="post">
                             <button class="btn btn-danger" name="forget">Forget all authors</button>
                         </form>
                     </td>
@@ -43,7 +43,7 @@
     <ul class="list-group">
         {% for a in authors %}
         <li class="list-group-item">
-            <a href="/authors/{{a|urlencode}}">{{a}}</a>
+            <a href="{{url_for('author_specified', author=a)}}">{{a}}</a>
         </li>
         {% endfor %}
     </ul>

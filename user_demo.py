@@ -1,47 +1,42 @@
-#!/usr/bin/env python
-
+from torch.functional import Tensor
 from testbench import Testbench
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import cv2
+import numpy as np
 
 Testbench.author('Petar Petrović')
 
+def image_loader(path: str) -> torch.Tensor:
+    image = (cv2.imread(path).astype("float32") / 255.0)[:, :, ::-1].copy()
+    return torch.from_numpy(image.transpose(2, 0, 1))
 
-def fibonacci(n: int) -> int:
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    else:
-        return fibonacci(n - 1) + fibonacci(n - 2)
+class RandomGamma():
+    def __init__(self, random_gamma_delta):
+        self.gamma_range = 1.0 - random_gamma_delta, 1.0 + random_gamma_delta
 
+    def __call__(self, image):
+        return np.power(image, np.random.uniform(*self.gamma_range))
 
-def factorial(n: int) -> int:
-    if n <= 1:
-        return 1
-    else:
-        return n * factorial(n - 1)
+class ClipImage():
+    def __call__(self, image):
+        return np.clip(image, 0.0, 1.0)
+        
+def getRandomGamma(randaom_gamma_delta : float) -> torch.Tensor:
+    return RandomGamma(randaom_gamma_delta)
 
+def getClipImage() -> torch.Tensor:
+    return ClipImage()
 
-def is_even(n: int) -> bool:
-    return n & 1 == 0
-
-import cv2
-import numpy as np
-def binarization(image: np.ndarray) -> np.ndarray:
-    # 127 for 33% correctness, 129 for 66% correctness
-    threshold = 128
-    image_grayscale: np.ndarray = cv2.cvtColor(
-        image, cv2.COLOR_RGB2GRAY
-    )
-    _, image_threshold = cv2.threshold(
-        image_grayscale, 
-        threshold, 255, 
-        cv2.THRESH_BINARY
-    )
-    return image_threshold
-
+#dummy
+def return_model1() -> torch.nn :
+    return 0
 
 if __name__ == '__main__':
-    Testbench(fibonacci)
-    Testbench(factorial)
-    Testbench(is_even)
-    Testbench(binarization)
+    Testbench(image_loader)
+    Testbench(getRandomGamma)
+    Testbench(getClipImage)
+    #dummy
+    Testbench(return_model1)
