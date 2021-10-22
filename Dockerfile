@@ -1,7 +1,7 @@
 FROM alpine:latest
 
-RUN apk update 
-RUN apk add python3 py3-pip curl
+RUN apk update
+RUN apk add python3 py3-pip curl make
 
 EXPOSE 80/tcp
 
@@ -10,6 +10,8 @@ HEALTHCHECK CMD ["/usr/bin/curl", "-f", "http://localhost:80/"]
 RUN mkdir -p /web
 COPY . /web/
 WORKDIR /web
+
+RUN cd ./config && make
 
 RUN pip install -r /web/requirements.txt
 
