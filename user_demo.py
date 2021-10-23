@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from typing import Any
 from testbench import Testbench
 import random
 
@@ -79,6 +80,34 @@ def kNN(X_test: np.ndarray, X_train: np.ndarray, Y_train: np.ndarray, k: int) ->
 
     return np.array(predictions)
 
+
+# Helpers for logistical regression
+def load_data(name: str):
+    df = pd.read_csv(name)
+    clean_df = pd.DataFrame()
+    for col in ["PC1", "PC2"]:
+        clean_df[col] = df[col]
+    targets = (df["NObeyesdad"] == 3).astype(int).rename("Obese")
+    return clean_df, targets
+def hypothesis(X, theta):
+    z = np.dot(theta, X.T)
+    return np.clip(1/(1+np.exp(-(z))), 0.000001, 0.9999999)
+def cost(y, h):
+    return -(1/len(y)) * np.sum(y*np.log(h) + (1-y)*np.log(1-h))
+
+
+def logistical_regression(X, y, theta, alpha, epochs) -> Any:
+    h = hypothesis(X, theta)
+    cost_history = [cost(y, h)] 
+    for _ in range(0, epochs):
+        h = hypothesis(X, theta)
+        for i in range(0, len(X.columns)):
+            theta[i] -= alpha * np.mean((h-y)*X.iloc[:, i])
+        cost_history.append(cost(y, h))
+    return cost_history, theta
+
+
 if __name__ == '__main__':
     Testbench(k_means)
     Testbench(kNN)
+    Testbench(logistical_regression)
