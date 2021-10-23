@@ -8,10 +8,6 @@ def test_kNN(bench: 'Testbench'):
     name = "testbench/tests/datasets/kNN/data_after_pca.csv"
 
     df = pd.read_csv(name)
-    clean_df = pd.DataFrame()
-
-    # No need to be cleaned
-    columns = ["PC1", "PC2", "NObeyesdad"]
     data = []
 
     data.append(df["PC1"])

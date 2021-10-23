@@ -25,7 +25,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31922ca5-ef31-40af-8c52-2b3cdc6c2225" name="Default Changelist" comment="Updates" />
+    <list default="true" id="31922ca5-ef31-40af-8c52-2b3cdc6c2225" name="Default Changelist" comment="Updates">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbench/tests/kNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbench/tests/kNN.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +53,13 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="stepanovic-basic-radovic-jovanovic-uvod-ML" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="JupyterTrust" id="824770c9-93b6-48a2-a3a6-5a5673ad090f" />
   <component name="ProjectId" id="1zoz6gtniZXkn0oA7PnIqpTD4Ad" />
