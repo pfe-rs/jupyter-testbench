@@ -26,8 +26,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31922ca5-ef31-40af-8c52-2b3cdc6c2225" name="Default Changelist" comment="Updates">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datasets/obesity_pca.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/notebooks/LogisticalRegression.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testbench/tests/datasets/logistical_regression/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testbench/tests/datasets/logistical_regression/obesity_pca.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testbench/tests/logistical_regression.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbench/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbench/tests/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testbench/tests/kNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbench/tests/kNN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_demo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,6 +177,7 @@
       <workItem from="1634888115670" duration="4394000" />
       <workItem from="1634907164527" duration="6412000" />
       <workItem from="1634916641175" duration="6456000" />
+      <workItem from="1634981341117" duration="42000" />
     </task>
     <task id="LOCAL-00001" summary="user_demo.py update">
       <created>1634829173554</created>
