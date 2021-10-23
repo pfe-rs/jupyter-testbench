@@ -8,10 +8,6 @@ def test_kNN(bench: 'Testbench'):
     name = "testbench/tests/datasets/kNN/data_after_pca.csv"
 
     df = pd.read_csv(name)
-    clean_df = pd.DataFrame()
-
-    # No need to be cleaned
-    columns = ["PC1", "PC2", "NObeyesdad"]
     data = []
 
     data.append(df["PC1"])
@@ -29,6 +25,6 @@ def test_kNN(bench: 'Testbench'):
 
     predicted_labels = bench.function(X_test, X_train, y_train)
 
-    for i in range(len(y_test)):
+    for i in range(len(predicted_labels)):
 
         bench.assert_eq(predicted_labels[i], y_test[i])
