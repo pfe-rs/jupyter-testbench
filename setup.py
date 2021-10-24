@@ -10,5 +10,5 @@ setup(
     packages=find_packages(exclude=['dashboard']),
     package_data={'': ['*.*']},
     license='LICENSE',
-    install_requires=['requests', 'typing', 'torch', 'numpy', 'opencv-python', 'torchvision', 'scikit-image', 'sklearn', 'matplotlib'],
+    install_requires=['requests', 'typing', 'torch', 'numpy', 'opencv-python', 'torchvision', 'scikit-image', 'sklearn', 'matplotlib', 'os'],
 )

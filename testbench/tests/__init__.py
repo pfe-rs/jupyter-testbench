@@ -4,3 +4,9 @@ from .training_loop import test_training_loop
 from .return_fashioncnn import test_return_fashioncnn
 from .getClipImage import test_getClipImage
 from .getRandomGamma import test_getRandomGamma
+from .getNN import test_getNN
+from .measure_quality import test_measure_quality
+from .get_transfer_learning_model import test_get_transfer_learning_model
+from .compose_transforms import test_compose_transforms
+from .split_data import test_split_data
+from .getDataLoader import test_getDataLoader

@@ -1,0 +1,1 @@
+https://github.com/Petlja/DataOfficer-mlfiles/blob/main/resnet_50_land_use.pt
