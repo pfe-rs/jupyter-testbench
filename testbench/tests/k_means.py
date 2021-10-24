@@ -1,12 +1,23 @@
 import numpy as np
 number_of_tests = 5
 from sklearn.metrics.cluster import adjusted_rand_score
+from importlib.resources import open_binary
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from .. import Testbench
 
 def test_k_means(bench: 'Testbench'):
+    if bench.function is None:
+        return
 
     for i in range(1, number_of_tests+1):
-        data = np.load("testbench/tests/datasets/k-means/data{}.npy".format(i))
-        true_labels = np.load("testbench/tests/datasets/k-means/labels{}.npy".format(i))
+        data = None
+        true_labels = None
+        pkg: str = 'testbench.tests.datasets.k-means'
+        with open_binary(pkg, 'data{}.npy'.format(i)) as file:
+            data = np.load(file)
+        with open_binary(pkg, 'labels{}.npy'.format(i)) as file:
+            true_labels = np.load(file)
         number_of_clusters = 4
 
 

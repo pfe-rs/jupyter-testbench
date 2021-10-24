@@ -1,13 +1,17 @@
 import numpy as np
-number_of_tests = 5
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from importlib.resources import open_binary
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from .. import Testbench
 
 def test_kNN(bench: 'Testbench'):
-
-    name = "testbench/tests/datasets/kNN/data_after_pca.csv"
-
-    df = pd.read_csv(name)
+    if bench.function is None:
+        return
+    df = None
+    with open_binary('testbench.tests.datasets.kNN', 'data_after_pca.csv') as file:
+        df = pd.read_csv(file)
     data = []
 
     data.append(df["PC1"])
