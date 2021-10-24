@@ -26,10 +26,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31922ca5-ef31-40af-8c52-2b3cdc6c2225" name="Default Changelist" comment="Updates">
-      <change beforePath="$PROJECT_DIR$/kNN.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/kNN.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/.ipynb_checkpoints/K-means vežba-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/K-means vežba.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testbench/tests/kNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbench/tests/kNN.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kNN1.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/K-means-Rešenje.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/K-means-Rešenje.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/K-means.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/K-means.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/kNN.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/kNN.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbench/tests/pca.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbench/tests/pca.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_demo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,18 +76,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/datasets/kNN" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/notebooks" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\jn200100d\OneDrive - student.etf.bg.ac.rs\Documents\GitHub\jupyter-testbench\datasets\kNN" />
-      <recent name="C:\Users\jn200100d\OneDrive - student.etf.bg.ac.rs\Documents\GitHub\jupyter-testbench\testbench\tests\datasets\kNN" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jn200100d\OneDrive - student.etf.bg.ac.rs\Documents\GitHub\jupyter-testbench" />
       <recent name="C:\Users\jn200100d\OneDrive - student.etf.bg.ac.rs\Documents\GitHub\jupyter-testbench\testbench\tests\datasets\k means" />
       <recent name="C:\Users\jn200100d\OneDrive - student.etf.bg.ac.rs\Documents\GitHub\jupyter-testbench\notebooks" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jn200100d\OneDrive - student.etf.bg.ac.rs\Documents\GitHub\jupyter-testbench\notebooks" />
+      <recent name="C:\Users\jn200100d\OneDrive - student.etf.bg.ac.rs\Documents\GitHub\jupyter-testbench\datasets\kNN" />
+      <recent name="C:\Users\jn200100d\OneDrive - student.etf.bg.ac.rs\Documents\GitHub\jupyter-testbench\testbench\tests\datasets\kNN" />
     </key>
   </component>
   <component name="RunManager" selected="Python.user_demo">
@@ -173,7 +177,8 @@
       <workItem from="1634888115670" duration="4394000" />
       <workItem from="1634907164527" duration="6412000" />
       <workItem from="1634916641175" duration="6456000" />
-      <workItem from="1634981341117" duration="796000" />
+      <workItem from="1634981341117" duration="1027000" />
+      <workItem from="1635062411726" duration="1078000" />
     </task>
     <task id="LOCAL-00001" summary="user_demo.py update">
       <created>1634829173554</created>
@@ -240,26 +245,26 @@
     <option name="LAST_COMMIT_MESSAGE" value="Updates" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="63" key="GridCell.Tab.0.bottom" timestamp="1634926003778">
+    <state width="1493" height="284" key="GridCell.Tab.0.bottom" timestamp="1635063601490">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1280.680@0.0.1536.824" timestamp="1634916249033" />
-    <state width="1493" height="63" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1634926003778" />
-    <state width="1493" height="63" key="GridCell.Tab.0.center" timestamp="1634926003778">
+    <state width="1493" height="284" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1635063601490" />
+    <state width="1493" height="284" key="GridCell.Tab.0.center" timestamp="1635063601489">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1280.680@0.0.1536.824" timestamp="1634916249033" />
-    <state width="1493" height="63" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1634926003778" />
-    <state width="1493" height="63" key="GridCell.Tab.0.left" timestamp="1634926003778">
+    <state width="1493" height="284" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1635063601489" />
+    <state width="1493" height="284" key="GridCell.Tab.0.left" timestamp="1635063601489">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1280.680@0.0.1536.824" timestamp="1634916249033" />
-    <state width="1493" height="63" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1634926003778" />
-    <state width="1493" height="63" key="GridCell.Tab.0.right" timestamp="1634926003778">
+    <state width="1493" height="284" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1635063601489" />
+    <state width="1493" height="284" key="GridCell.Tab.0.right" timestamp="1635063601490">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1280.680@0.0.1536.824" timestamp="1634916249033" />
-    <state width="1493" height="63" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1634926003778" />
+    <state width="1493" height="284" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1635063601490" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1634916249033">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -296,7 +301,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/jupyter_testbench$jupyter_testbench.coverage" NAME="jupyter-testbench Coverage Results" MODIFIED="1634829090340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/jupyter_testbench$user_demo.coverage" NAME="user_demo Coverage Results" MODIFIED="1634921130637" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/jupyter_testbench$user_demo.coverage" NAME="user_demo Coverage Results" MODIFIED="1635063426741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/jupyter_testbench$pca.coverage" NAME="pca Coverage Results" MODIFIED="1634909796211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Downloads" />
   </component>
 </project>

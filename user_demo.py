@@ -49,9 +49,10 @@ def k_means(data: np.ndarray) -> np.ndarray:
     return predicted_labels
 
 
-def kNN(X_test: np.ndarray, X_train: np.ndarray, Y_train: np.ndarray, k: int) -> np.ndarray:
+def kNN(X_test: np.ndarray, X_train: np.ndarray, Y_train: np.ndarray) -> np.ndarray:
     predictions = []
 
+    k = 15
     for test_point in X_test:
         min_dist = []
         # za svaku vrednost iz seta za treniranje izračunati Euklidsku distancu od vrednosti iz test seta
@@ -177,3 +178,5 @@ if __name__ == '__main__':
     Testbench(pca)
     Testbench(bayes_train)
     Testbench(classify)
+    Testbench(kNN)
+    Testbench(k_means)

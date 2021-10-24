@@ -9,5 +9,4 @@ def test_pca(bench):
     X = np.load(open(test_data_pth + "data_cov_red.npy", "rb"))
 
     reduced = bench.function(X, 2)
-
-    bench.assert_expr((gt == reduced).all())
+    bench.assert_expr(np.isclose(gt,reduced).all())
