@@ -107,7 +107,73 @@ def logistical_regression(X, y, theta, alpha, epochs) -> Any:
     return cost_history, theta
 
 
+def classify(apriori: np.array, conditional: np.array, pc1: int, pc2: int) -> int:
+    pc1 = int(pc1)
+    pc2 = int(pc2)
+    not_obs = apriori[0] * conditional[0, 0, pc1] * conditional[1, 0, pc2]
+    obs = apriori[1] * conditional[0, 1, pc1] * conditional[1, 1, pc2]
+    return int(np.argmax([not_obs, obs]))
+
+def bayes_train(X, Y, num_of_buckets=20):
+    # Calculate apriori probability
+    apriori_prob = np.zeros(2)
+    apriori_prob[0] = np.sum(Y == 0) / len(Y)
+    apriori_prob[1] = np.sum(Y == 1) / len(Y)
+
+    # Conditional probability
+    conditional_prob = np.zeros((2, 2, num_of_buckets+1))
+    for pc in range(2):
+        features = X[:, pc]
+        for i in range(2):
+            cnt = np.sum(Y == i)
+            for val in range(num_of_buckets+1):
+                conditional_prob[pc, i, val] = (np.sum(features[Y == i] == val) + 1) / cnt
+
+    return apriori_prob, conditional_prob
+
+def covariance_reduce(X: pd.DataFrame, targets: pd.DataFrame, N: int = 10) -> np.array:
+    # Potrebno je prvo spojiti DataFrame-ove fičera i klasa u jedan, 
+    # a onda izračunati korelacionu matricu (funkcija .corr() može biti korisna ovde)
+    xy = pd.concat([X, targets], axis=1)
+    target_cov = xy.corr().to_numpy()[:-1, -1]
+
+    # Izdvojiti top N fičera na osnovu poslednje kolone korelacione matrice
+    # Hint 1: Za pronalaženje najvećih korelacija može koristiti funkcija np.argsort,
+    #         ili prolasci for petljama
+    sorted_idx = np.argsort(target_cov)[::-1]
+    X_new = X.to_numpy()[:, sorted_idx[: N]]
+    return X_new
+
+def pca(X: np.array, M: int) -> np.array:
+
+    # Step 1: Izračunaj kovariacionu matricu od X.T
+    # Step 2: Izračunaj sopstvene vrednosti i vektore
+    # Step 3: Odabrati top M sopstvenih vektora na osnovu sopstvenih vrednosti
+    #         Hint: np.argsort
+    # Step 4: Primeniti Transformaciju nad podacima: 
+    
+    # Calculate covariance matrix
+    X = X - np.mean(X, axis=0)
+    cov_mat = np.cov(X.T)
+
+    # Calculate eig
+    eigen_values, eigen_vectors = np.linalg.eigh(cov_mat)
+
+    # Sort indexes
+    sorted_indexes = np.argsort(eigen_values)[::-1]
+    eigen_values = eigen_values[sorted_indexes]
+    eigen_vectors = eigen_vectors[:, sorted_indexes]
+
+    # Take vector subset
+    eigv_subset = eigen_vectors[:, 0: M]
+
+    # Reduce X
+    X_reduced = np.dot(eigv_subset.T, X.T).T
+
+    return X_reduced
+
 if __name__ == '__main__':
-    Testbench(k_means)
-    Testbench(kNN)
-    Testbench(logistical_regression)
+    Testbench(covariance_reduce)
+    Testbench(pca)
+    Testbench(bayes_train)
+    Testbench(classify)
