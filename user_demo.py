@@ -33,10 +33,10 @@ class ClipImage():
     def __repr__(self):
         return 'ClipImage()'
         
-def getRandomGamma(randaom_gamma_delta : float) -> torch.Tensor:
+def getRandomGamma(randaom_gamma_delta : float) -> RandomGamma:
     return RandomGamma(randaom_gamma_delta)
 
-def getClipImage() -> torch.Tensor:
+def getClipImage() -> ClipImage:
     return ClipImage()
 
 #dummy
@@ -126,7 +126,7 @@ def getDataLoader(dataset : torch.utils.data.Dataset , batch_size : int) -> torc
         drop_last=True, 
         pin_memory=True)
 
-def get_transfer_learning_model():
+def get_transfer_learning_model() -> torchvision.models.ResNet:
     model = torchvision.models.resnet50(pretrained=True)
     num_features = model.fc.in_features
     model.fc = nn.Linear(num_features, 10)
