@@ -22,7 +22,7 @@ def return_fashioncnn() -> nn.Sequential:
         nn.Linear(in_features=64*6*6, out_features=600),
         nn.Dropout2d(0.25),
         nn.Linear(in_features=600, out_features=120),
-        nn.Linear(in_features=120, out_features=10),)
+        nn.Linear(in_features=120, out_features=10))
 
 def test_return_fashioncnn(bench: 'Testbench'):
   if bench.function is None:
