@@ -23,9 +23,15 @@ class RandomGamma():
     def __call__(self, image):
         return np.power(image, np.random.uniform(*self.gamma_range))
 
+    def __repr__(self):
+        return 'RandomGamma('+str(self.gamma_range)+')'
+
 class ClipImage():
     def __call__(self, image):
         return np.clip(image, 0.0, 1.0)
+
+    def __repr__(self):
+        return 'ClipImage()'
         
 def getRandomGamma(randaom_gamma_delta : float) -> torch.Tensor:
     return RandomGamma(randaom_gamma_delta)
@@ -129,6 +135,4 @@ if __name__ == '__main__':
     Testbench(compose_transforms)
     Testbench(get_transfer_learning_model)
     Testbench(measure_quality)
-    
-
-    
+     

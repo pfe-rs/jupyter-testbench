@@ -35,4 +35,11 @@ def test_split_data(bench : 'Testbench'):
     dataset = torchvision.datasets.DatasetFolder(root=str(pth)+r"\datasets\classes_root", loader=image_loader, extensions="jpg")
     data_loader = getDataLoader(dataset, 2)
     ratios = [0.5, 0.5]
-    bench.assert_expr(repr(split_data(ratios, data_loader)) == repr(bench.function(ratios, data_loader)))
+    base = split_data(ratios, data_loader)
+    output = bench.function(ratios, data_loader)
+    if len(base)!=len(output):
+        bench.assert_expr(False)
+        return
+    for base_indices, output_indices in zip(base, output):
+        for base_index, output_index in zip(base_indices.indices, output_indices.indices):
+            bench.assert_eq(output_index, base_index)

@@ -8,12 +8,20 @@ class ClipImage():
     def __call__(self, image):
         return np.clip(image, 0.0, 1.0)
     
+    def __repr__(self):
+        return 'ClipImage()'
+    
 class RandomGamma():
     def __init__(self, random_gamma_delta):
         self.gamma_range = 1.0 - random_gamma_delta, 1.0 + random_gamma_delta
 
     def __call__(self, image):
         return np.power(image, np.random.uniform(*self.gamma_range))
+    
+    def __repr__(self):
+        return 'RandomGamma('+str(self.gamma_range)+')'
+
+        
 
 def compose_transforms() -> torchvision.transforms.Compose:
     return torchvision.transforms.Compose([
@@ -28,4 +36,6 @@ def compose_transforms() -> torchvision.transforms.Compose:
 ])
 
 def test_compose_transforms(bench : 'Testbench'):
-    bench.assert_expr(repr(compose_transforms())== repr(bench.function()))
+    tmp=compose_transforms()
+    for base, output in zip(compose_transforms().transforms, bench.function().transforms):
+        bench.assert_expr(repr(base)== repr(output))

@@ -63,5 +63,6 @@ def test_measure_quality(bench: 'Testbench'):
     dataset = torchvision.datasets.DatasetFolder(
         root=r"datasets\classes_root", 
         loader=image_loader, extensions="jpg")
-    dataLoader = getDataLoader(dataset, 2)
-    bench.assert_expr(measure_quality(model, dataLoader, device) == bench.function(model, dataLoader, device))
+    dataLoader1 = getDataLoader(dataset, 2)
+    dataLoader2 = getDataLoader(dataset, 2)
+    bench.assert_expr(measure_quality(model, dataLoader1, device) == bench.function(model, dataLoader2, device))
