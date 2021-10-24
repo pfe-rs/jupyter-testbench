@@ -24,5 +24,5 @@ def test_bayes_train(bench: 'Testbench'):
         conditional_truth = np.load(file)
     apriori, conditional = bench.function(X, Y)
 
-    bench.assert_expr((apriori_truth == apriori).all())
-    bench.assert_expr((conditional_truth == conditional).all())
+    bench.assert_expr(np.isclose(apriori_truth, apriori).all())
+    bench.assert_expr(np.isclose(conditional_truth, conditional).all())

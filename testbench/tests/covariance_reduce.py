@@ -24,4 +24,4 @@ def test_covariance_reduce(bench: 'Testbench'):
 
     reduced = bench.function(X, Y)
 
-    bench.assert_expr((gt == reduced).all())
+    bench.assert_expr(np.isclose(gt, reduced).all())
