@@ -89,22 +89,22 @@ def load_data(name: str):
         clean_df[col] = df[col]
     targets = (df["NObeyesdad"] == 3).astype(int).rename("Obese")
     return clean_df, targets
-def hypothesis(X, theta):
-    z = np.dot(theta, X.T)
+def hypothesis(X, B):
+    z = np.dot(B, X.T)
     return np.clip(1/(1+np.exp(-(z))), 0.000001, 0.9999999)
 def cost(y, h):
     return -(1/len(y)) * np.sum(y*np.log(h) + (1-y)*np.log(1-h))
 
 
-def logistical_regression(X, y, theta, alpha, epochs) -> Any:
-    h = hypothesis(X, theta)
+def logistical_regression(X, y, B, alpha, epochs) -> Any:
+    h = hypothesis(X, B)
     cost_history = [cost(y, h)] 
     for _ in range(0, epochs):
-        h = hypothesis(X, theta)
+        h = hypothesis(X, B)
         for i in range(0, len(X.columns)):
-            theta[i] -= alpha * np.mean((h-y)*X.iloc[:, i])
+            B[i] -= alpha * np.mean((h-y)*X.iloc[:, i])
         cost_history.append(cost(y, h))
-    return cost_history, theta
+    return cost_history, B
 
 
 def classify(apriori: np.array, conditional: np.array, pc1: int, pc2: int) -> int:
