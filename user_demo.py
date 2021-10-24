@@ -62,6 +62,25 @@ def getNN() -> nn.Sequential:
         nn.ReLU(),
         nn.Linear(84, 10))
 
+def return_fashioncnn() -> nn.Sequential:
+    return nn.Sequential(
+    nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, padding=1),
+    nn.BatchNorm2d(32),
+    nn.ReLU(),
+    nn.MaxPool2d(kernel_size=2, stride=2),
+    
+    nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3),
+    nn.BatchNorm2d(64),
+    nn.ReLU(),
+    nn.MaxPool2d(2),
+    nn.Flatten(),
+
+    nn.Linear(in_features=64*6*6, out_features=600),
+    nn.Dropout2d(0.25),
+    nn.Linear(in_features=600, out_features=120),
+    nn.Linear(in_features=120, out_features=10),
+)
+
 def measure_quality(model : nn.Sequential, loader : torch.utils.data.DataLoader, device : any, max_batches: int=None) -> float:
     model.eval()
     iteration_cnt = 0
@@ -135,4 +154,4 @@ if __name__ == '__main__':
     Testbench(compose_transforms)
     Testbench(get_transfer_learning_model)
     Testbench(measure_quality)
-     
+    Testbench(return_fashioncnn)
