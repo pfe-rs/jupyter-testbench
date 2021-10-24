@@ -97,7 +97,7 @@ def cost(y, h):
     return -(1/len(y)) * np.sum(y*np.log(h) + (1-y)*np.log(1-h))
 
 
-def logistical_regression(X, y, B, alpha, epochs) -> Any:
+def logistical_regression(X: np.ndarray, y: np.ndarray, B: np.ndarray, alpha: float, epochs: int) -> Any:
     h = hypothesis(X, B)
     cost_history = [cost(y, h)] 
     for _ in range(0, epochs):
@@ -108,14 +108,14 @@ def logistical_regression(X, y, B, alpha, epochs) -> Any:
     return cost_history, B
 
 
-def classify(apriori: np.array, conditional: np.array, pc1: int, pc2: int) -> int:
+def classify(apriori: np.ndarray, conditional: np.ndarray, pc1: int, pc2: int) -> int:
     pc1 = int(pc1)
     pc2 = int(pc2)
     not_obs = apriori[0] * conditional[0, 0, pc1] * conditional[1, 0, pc2]
     obs = apriori[1] * conditional[0, 1, pc1] * conditional[1, 1, pc2]
     return int(np.argmax([not_obs, obs]))
 
-def bayes_train(X, Y, num_of_buckets=20):
+def bayes_train(X: np.ndarray, Y: np.ndarray, num_of_buckets=20) -> tuple:
     # Calculate apriori probability
     apriori_prob = np.zeros(2)
     apriori_prob[0] = np.sum(Y == 0) / len(Y)
@@ -132,7 +132,7 @@ def bayes_train(X, Y, num_of_buckets=20):
 
     return apriori_prob, conditional_prob
 
-def covariance_reduce(X: pd.DataFrame, targets: pd.DataFrame, N: int = 10) -> np.array:
+def covariance_reduce(X: pd.DataFrame, targets: pd.DataFrame, N: int = 10) -> np.ndarray:
     # Potrebno je prvo spojiti DataFrame-ove fičera i klasa u jedan, 
     # a onda izračunati korelacionu matricu (funkcija .corr() može biti korisna ovde)
     xy = pd.concat([X, targets], axis=1)
@@ -145,7 +145,7 @@ def covariance_reduce(X: pd.DataFrame, targets: pd.DataFrame, N: int = 10) -> np
     X_new = X.to_numpy()[:, sorted_idx[: N]]
     return X_new
 
-def pca(X: np.array, M: int) -> np.array:
+def pca(X: np.array, M: int) -> np.ndarray:
 
     # Step 1: Izračunaj kovariacionu matricu od X.T
     # Step 2: Izračunaj sopstvene vrednosti i vektore
@@ -180,3 +180,4 @@ if __name__ == '__main__':
     Testbench(classify)
     Testbench(kNN)
     Testbench(k_means)
+    Testbench(logistical_regression)
