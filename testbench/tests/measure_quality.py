@@ -60,7 +60,7 @@ def test_measure_quality(bench: 'Testbench'):
       return
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model = get_transfer_learning_model()
-    model.to_device(device)
+    model.to(device)
     dirr = os.path.dirname(os.path.realpath(__file__))
     pth = os.path.join(dirr, "datasets/classes_root")
     dataset = torchvision.datasets.DatasetFolder(
