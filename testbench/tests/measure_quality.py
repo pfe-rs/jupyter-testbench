@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import os
 import cv2
 from sklearn.metrics import accuracy_score
 from importlib.resources import contents, path
@@ -60,8 +61,10 @@ def test_measure_quality(bench: 'Testbench'):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model = get_transfer_learning_model()
     model.to_device(device)
+    dirr = os.path.dirname(os.path.realpath(__file__))
+    pth = os.path.join(dirr, "datasets/classes_root")
     dataset = torchvision.datasets.DatasetFolder(
-        root=r"datasets\classes_root", 
+        root=str(pth), 
         loader=image_loader, extensions="jpg")
     dataLoader1 = getDataLoader(dataset, 2)
     dataLoader2 = getDataLoader(dataset, 2)

@@ -21,7 +21,8 @@ def getDataLoader(dataset : torch.utils.data.Dataset , batch_size : int) -> torc
         pin_memory=True)
 
 def test_getDataLoader(bench : 'Testbench'):
-    pth = os.path.dirname(os.path.realpath(__file__))
-    dataset = torchvision.datasets.DatasetFolder(root=str(pth)+r"\datasets\classes_root", loader=image_loader, extensions="jpg")
+    dirr = os.path.dirname(os.path.realpath(__file__))
+    pth = os.path.join(dirr, "datasets/classes_root")
+    dataset = torchvision.datasets.DatasetFolder(root=str(pth), loader=image_loader, extensions="jpg")
     data_loader = getDataLoader(dataset, 2)
     bench.assert_expr(repr(getDataLoader(dataset, 2))==repr(bench.function(dataset, 2)))

@@ -31,8 +31,9 @@ def split_data(ratios : list, dataset: torch.utils.data.DataLoader) -> list:
         generator=torch.Generator().manual_seed(DATASET_SEED))
 
 def test_split_data(bench : 'Testbench'):
-    pth = os.path.dirname(os.path.realpath(__file__))
-    dataset = torchvision.datasets.DatasetFolder(root=str(pth)+r"\datasets\classes_root", loader=image_loader, extensions="jpg")
+    dirr = os.path.dirname(os.path.realpath(__file__))
+    pth = os.path.join(dirr, "datasets/classes_root")
+    dataset = torchvision.datasets.DatasetFolder(root=str(pth), loader=image_loader, extensions="jpg")
     data_loader = getDataLoader(dataset, 2)
     ratios = [0.5, 0.5]
     base = split_data(ratios, data_loader)
