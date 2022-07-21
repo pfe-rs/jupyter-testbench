@@ -1,0 +1,11 @@
+# Infrastructure maintainers are default owners
+*                   @pfe-rs/infra
+
+# Testbench unit tests
+testbench/tests/
+
+# User-facing datasets
+datasets/
+
+# User-facing Jupyter Notebooks
+notebooks/

@@ -29,11 +29,9 @@ jobs:
       - name: Dependency check for Testbench imports
         run: ./validator.sh 'module_import_test'
       - name: Prepare system for execution
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.x"
-      - name: Install pip build dependencies
-        run: pip install wheel
+        run: |
+          sudo apt update
+          cat ./requirements.system.txt | xargs sudo apt -y install
       - name: Install Testbench module to system
         run: |
           sudo apt update

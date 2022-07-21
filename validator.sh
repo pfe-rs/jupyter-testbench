@@ -66,6 +66,10 @@ modules_user="$(
 module_import_user() {
     error_msg='Potentially missing dependency in setup.py for user imported module '
     for m in $modules_user; do
+        if [ "$m" = 'testbench' ]; then
+            continue
+        fi
+        m="$(echo "$m" | sed 's/\..*//')"
         error_subj="$m"
         grep -q "install_requires=.*'$m'" ./setup.py || return 2
     done
@@ -79,6 +83,10 @@ modules_test="$(
 module_import_test() {
     error_msg='Potentially missing dependency in setup.py for Testbench imported module '
     for m in $modules_test; do
+        if [ "$m" = 'testbench' ]; then
+            continue
+        fi
+        m="$(echo "$m" | sed 's/\..*//')"
         error_subj="$m"
         grep -q "install_requires=.*'$m'" ./setup.py || return 2
     done
