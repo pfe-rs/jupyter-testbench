@@ -2,7 +2,7 @@ import numpy as np
 import testbench
 
 def meanPower(x: np.array) -> float:
-    y = np.mean(x)
+    y = np.mean(np.square(x))
     return y
 
 def test_meanPower(bench: 'Testbench'):
