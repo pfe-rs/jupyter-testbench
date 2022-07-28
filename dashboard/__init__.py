@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, Response
 import json
+import pickle
 import typing
 import os
 import pkgutil
@@ -21,6 +22,7 @@ def load_config() -> typing.Optional[dict]:
             'port': 8089,
             'debug': True
         }
+
 
 def load_users() -> dict[str, str]:
     users: list[dict[str, str]] = []
@@ -268,6 +270,45 @@ def reset_authors_specified(author):
         board.reset_author(author)
         return redirect(url_for('authors_all'), 302)
     return 'Must be POSTed'
+
+
+@ app.route("/export", methods=['GET'])
+def export_scoreboard():
+    if request.method == 'GET':
+        return Response(
+            json.dumps({
+                'authors': Scoreboard.authors,
+                'scoreboard': board.board
+            }),
+            mimetype='application/json'
+        )
+    else:
+        return 'Err'
+
+
+@ app.route("/import", methods=['GET', 'POST'])
+def import_scoreboard():
+    if request.method == 'GET':
+        return render_template("import.html")
+    elif request.method == 'POST':
+        keep = 'keepExisting' in request.form
+        upload = request.files['scoreboardFile']
+        obj = json.loads(upload.stream.read())
+        if keep:
+            Scoreboard.authors = list(set(
+                Scoreboard.authors + obj['authors']
+            ))
+            for test_name in obj['scoreboard']:
+                if test_name in obj['scoreboard']:
+                    board.board[test_name] |= obj['scoreboard'][test_name]
+                else:
+                    board.board[test_name] = obj['scoreboard'][test_name]
+        else:
+            Scoreboard.authors = obj['authors']
+            board.board = obj['scoreboard']
+        return redirect(url_for('root'), 302)
+    else:
+        return 'Err'
 
 
 if __name__ == '__main__':

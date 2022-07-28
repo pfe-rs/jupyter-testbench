@@ -14,6 +14,20 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <h1>Dashboard</h1>
+            <table>
+                <tr>
+                    <td>
+                        <form action="{{url_for('export_scoreboard')}}" method="get">
+                            <button class="btn btn-secondary" name="export">Export</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{url_for('import_scoreboard')}}" method="get">
+                            <button class="btn btn-secondary" name="import">Import</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
         </div>
     </nav>
     <ul class="list-group">
