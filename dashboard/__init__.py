@@ -7,6 +7,7 @@ import typing
 import os
 import pkgutil
 import sys
+from datetime import datetime
 sys.path.append(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
@@ -275,13 +276,17 @@ def reset_authors_specified(author):
 @ app.route("/export", methods=['GET'])
 def export_scoreboard():
     if request.method == 'GET':
-        return Response(
+        r = Response(
             json.dumps({
                 'authors': Scoreboard.authors,
                 'scoreboard': board.board
             }),
-            mimetype='application/json'
+            mimetype='application/json',
         )
+        t = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+        r.headers[
+            'Content-Disposition'] = f'attachment; filename="testbench_dashboard_{t}"'
+        return r
     else:
         return 'Err'
 
@@ -299,7 +304,7 @@ def import_scoreboard():
                 Scoreboard.authors + obj['authors']
             ))
             for test_name in obj['scoreboard']:
-                if test_name in obj['scoreboard']:
+                if test_name in board.board:
                     board.board[test_name] |= obj['scoreboard'][test_name]
                 else:
                     board.board[test_name] = obj['scoreboard'][test_name]
