@@ -241,36 +241,37 @@ def submit_authors():
         return 'Err'
 
 
-@ app.route("/reset/tests", methods=['POST'])
+@ app.route("/reset/tests", methods=['GET'])
 def reset_tests_all():
-    if request.method == 'POST':
+    if request.method == 'GET':
         board.reset_all_tests()
         return redirect(url_for('tests_all'), 302)
-    return 'Must be POSTed'
+    return 'Err'
 
 
-@ app.route("/reset/tests/<string:test>", methods=['POST'])
+@ app.route("/reset/tests/<string:test>", methods=['GET'])
 def reset_tests_specified(test):
-    if request.method == 'POST':
+    if request.method == 'GET':
         board.reset_test(test)
         return redirect(url_for('tests_specified', test=test), 302)
-    return 'Must be POSTed'
+    return 'Err'
 
 
-@ app.route("/reset/authors", methods=['POST'])
+@ app.route("/reset/authors", methods=['GET'])
 def reset_authors_all():
-    if request.method == 'POST':
+    if request.method == 'GET':
         board.reset_all_authors()
+        board.reset_all_tests()
         return redirect(url_for('authors_all'), 302)
-    return 'Must be POSTed'
+    return 'Err'
 
 
-@ app.route("/reset/authors/<string:author>", methods=['POST'])
+@ app.route("/reset/authors/<string:author>", methods=['GET'])
 def reset_authors_specified(author):
-    if request.method == 'POST':
+    if request.method == 'GET':
         board.reset_author(author)
         return redirect(url_for('authors_all'), 302)
-    return 'Must be POSTed'
+    return 'Err'
 
 
 @ app.route("/export", methods=['GET'])

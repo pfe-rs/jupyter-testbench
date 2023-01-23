@@ -2,122 +2,82 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <h1>
-                <img height="32px" src="{{ url_for('static', filename='images/icon.png') }}" alt="Icon">
+                <a href="{{url_for('root')}}"><img height="32px" src="{{ url_for('static', filename='images/icon.png') }}" alt="Dashboard icon"></a>
                 {{ title }}
             </h1>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="autoreload">
                 <label class="form-check-label" for="autoreload">
-                    <dfn title="Reload page every 5 seconds">Auto-reload</dfn>
+                    <dfn title="Reload page every 5 seconds">Auto-refresh</dfn>
                 </label>
             </div>
             <table>
                 {% if buttons == 'import-export' %}
                 <tr>
                     <td>
-                        <form action="{{url_for('export_scoreboard')}}" method="get">
-                            <button class="btn btn-secondary" name="export">Export</button>
-                        </form>
+                        <a href="{{url_for('export_scoreboard')}}" role="button" class="btn btn-secondary">
+                            Export
+                        </a>
                     </td>
                     <td>
-                        <form action="{{url_for('import_scoreboard')}}" method="get">
-                            <button class="btn btn-success" name="import">Import</button>
-                        </form>
+                        <a href="{{url_for('import_scoreboard')}}" role="button" class="btn btn-success">
+                            Import
+                        </a>
                     </td>
                 </tr>
                 {% elif buttons == 'test' %}
                 <td>
-                    <form action="{{url_for('root')}}" method="get">
-                        <button class="btn btn-secondary" name="back">Dashboard</button>
-                    </form>
+                    <a href="{{url_for('tests_all')}}" role="button" class="btn btn-secondary">
+                        Tests
+                    </a>
                 </td>
                 <td>
-                    <form action="{{url_for('tests_all')}}" method="get">
-                        <button class="btn btn-secondary" name="back">Tests</button>
-                    </form>
+                    <a href="{{url_for('authors_all')}}" role="button" class="btn btn-secondary">
+                        Authors
+                    </a>
                 </td>
                 <td>
-                    <form action="{{url_for('authors_all')}}" method="get">
-                        <button class="btn btn-secondary" name="back">Authors</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="{{url_for('tests_specified', test=test)}}" method="get">
-                        <button class="btn btn-primary" name="refresh">Refresh</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="{{url_for('reset_tests_specified', test=test)}}" method="post">
-                        <button class="btn btn-danger" name="reset">Reset test scoreboard</button>
-                    </form>
+                    <a href="{{url_for('reset_tests_specified', test=test)}}" role="button" class="btn btn-danger">
+                        Reset test scoreboard
+                    </a>
                 </td>
                 {% elif buttons == 'tests' %}
                 <td>
-                    <form action="{{url_for('root')}}" method="get">
-                        <button class="btn btn-secondary" name="back">Dashboard</button>
-                    </form>
+                    <a href="{{url_for('authors_all')}}" role="button" class="btn btn-secondary">
+                        Authors
+                    </a>
                 </td>
                 <td>
-                    <form action="{{url_for('authors_all')}}" method="get">
-                        <button class="btn btn-secondary" name="back">Authors</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="{{url_for('tests_all')}}" method="get">
-                        <button class="btn btn-primary" name="refresh">Refresh</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="{{url_for('reset_tests_all')}}" method="post">
-                        <button class="btn btn-danger" name="reset">Reset all scoreboards</button>
-                    </form>
+                    <a href="{{url_for('reset_tests_all')}}" role="button" class="btn btn-danger">
+                        Reset all scoreboards
+                    </a>
                 </td>
                 {% elif buttons == 'author' %}
                 <td>
-                    <form action="{{url_for('root')}}" method="get">
-                        <button class="btn btn-secondary" name="back">Dashboard</button>
-                    </form>
+                    <a href="{{url_for('tests_all')}}" role="button" class="btn btn-secondary">
+                        Tests
+                    </a>
                 </td>
                 <td>
-                    <form action="{{url_for('tests_all')}}" method="get">
-                        <button class="btn btn-secondary" name="back">Tests</button>
-                    </form>
+                    <a href="{{url_for('authors_all')}}" role="button" class="btn btn-secondary">
+                        Authors
+                    </a>
                 </td>
                 <td>
-                    <form action="{{url_for('authors_all')}}" method="get">
-                        <button class="btn btn-secondary" name="back">Authors</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="{{url_for('author_specified', author=author)}}" method="get">
-                        <button class="btn btn-primary" name="refresh">Refresh</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="{{url_for('reset_authors_specified', author=author)}}" method="post">
-                        <button class="btn btn-danger" name="forget">Remove author</button>
-                    </form>
+                    <a href="{{url_for('reset_authors_specified', author=author)}}" role="button" class="btn btn-danger">
+                        Remove author
+                    </a>
                 </td>
                 {% elif buttons == 'authors' %}
                 <td>
-                    <form action="{{url_for('root')}}" method="get">
-                        <button class="btn btn-secondary" name="back">Dashboard</button>
-                    </form>
+                    <a href="{{url_for('tests_all')}}" role="button" class="btn btn-secondary">
+                        Tests
+                    </a>
                 </td>
                 <td>
-                    <form action="{{url_for('tests_all')}}" method="get">
-                        <button class="btn btn-secondary" name="back">Tests</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="{{url_for('authors_all')}}" method="get">
-                        <button class="btn btn-primary" name="refresh">Refresh</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="{{url_for('reset_authors_all')}}" method="post">
-                        <button class="btn btn-danger" name="forget">Forget all authors</button>
-                    </form>
+                    <a href="{{url_for('reset_authors_all')}}" role="button" class="btn btn-danger">
+                        Forget all authors and solutions
+                    </a>
                 </td>
                 {% endif %}
             </table>
