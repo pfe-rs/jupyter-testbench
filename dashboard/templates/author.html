@@ -1,61 +1,13 @@
 <!doctype html>
 <html>
 
-<head>
-    <title>Author — {{author}}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-    <style>
-        .prettyprint {
-            border: 0 !important;
-            margin: 0;
-            max-height: 1rem;
-        }
+{% set title = 'Author — ' ~ author %}
+{% set buttons = 'author' %}
 
-        .prettyprint:hover {
-            max-height: none;
-        }
-    </style>
-</head>
+{% include 'head.html' %}
 
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <h1>Author — {{author}}</h1>
-            <table>
-                <tr>
-                    <td>
-                        <form action="{{url_for('root')}}" method="get">
-                            <button class="btn btn-secondary" name="back">Dashboard</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="{{url_for('tests_all')}}" method="get">
-                            <button class="btn btn-secondary" name="back">Tests</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="{{url_for('authors_all')}}" method="get">
-                            <button class="btn btn-secondary" name="back">Authors</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="{{url_for('author_specified', author=author)}}" method="get">
-                            <button class="btn btn-primary" name="refresh">Refresh</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="{{url_for('reset_authors_specified', author=author)}}" method="post">
-                            <button class="btn btn-danger" name="forget">Remove author</button>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </nav>
+    {% include 'header.html' %}
     <table class="table table-bordered">
         <thead class="table-light">
             <tr>

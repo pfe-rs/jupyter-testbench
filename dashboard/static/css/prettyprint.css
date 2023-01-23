@@ -1,0 +1,9 @@
+.prettyprint {
+    border: 0 !important;
+    margin: 0;
+    max-height: 1rem;
+}
+
+.prettyprint:hover {
+    max-height: none;
+}
